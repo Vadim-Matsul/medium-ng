@@ -1,11 +1,9 @@
-const PrettierPluginSortImports = require('@ianvs/prettier-plugin-sort-imports');
-
-const packages = ['@angular/core/(.*)', '@angular/(.*)', 'rxjs(.*)'];
+const packages = ['@angular/core(.*)', '@angular/(.*)', 'rxjs(.*)'];
 
 /** @type{import('prettier').Config} */
 module.exports = {
-  plugins: [PrettierPluginSortImports],
-  printWidth: 100,
+  plugins: [require('@ianvs/prettier-plugin-sort-imports')],
+  printWidth: 80,
   tabWidth: 2,
   useTabs: false,
   semi: true,
@@ -17,25 +15,15 @@ module.exports = {
   bracketSameLine: false,
   arrowParens: 'avoid',
   endOfLine: 'lf',
+
   importOrderSeparation: false,
   importOrderMergeDuplicateImports: true,
   importOrderSortSpecifiers: true,
+  importOrderParserPlugins: ["typescript", "decorators-legacy"],
   importOrder: packages.concat('', [
-    '^(?:\\W){0,}([A-Z]|components|((button|template|modals|blocks|feed|overlays|screens|message(s|-settings))\\/[A-Z]))(?!(.*)(icons|Icon))',
+    '(.*)module(.*)',
+    '(.*)component(.*)',
+    '(.*)service(.*)',
     '<THIRD_PARTY_MODULES>',
   ]),
-  overrides: [
-    {
-      "files": "*.ts",
-      "options": {
-        "parser": "babel-ts"
-      },
-    },
-    {
-      "files": "*.html",
-      "options": {
-        "parser": "html"
-      }
-    }
-  ],
 };
