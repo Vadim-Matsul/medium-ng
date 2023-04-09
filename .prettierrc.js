@@ -1,4 +1,4 @@
-const packages = ['@angular/core(.*)', '@angular/(.*)', 'rxjs(.*)'];
+const packages = ['@angular/core(.*)', '@angular/(.*)', 'ngrx(.*)', 'rxjs(.*)', ];
 
 /** @type{import('prettier').Config} */
 module.exports = {

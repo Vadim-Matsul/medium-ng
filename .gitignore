@@ -41,3 +41,9 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+
+# Yarn
+.yarn
+yarn.lock
+.pnp.cjs
+.pnp.loader.mjs

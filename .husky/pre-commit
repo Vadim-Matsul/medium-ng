@@ -3,6 +3,6 @@
 
 # run prettier
 echo -e "\033[31m prettier working \033[0m"
-npm.cmd run format
+yarn run format
 
 git add .;
