@@ -1,1 +1,45 @@
-register
+<div class="auth-page">
+  <div class="container page">
+    <div class="row">
+      <div class="col-md-6 col-xs-12 offset-md-3">
+        <h1 class="text-xs-center">Sign Up</h1>
+        <p class="text-xs-center">
+          <a [routerLink]="['/', AuthLinks.Login]">Have an account?</a>
+        </p>
+        <!-- TODO: add Backend errors component -->
+        Backend errors are here
+        <form [formGroup]="form" (ngSubmit)="formSubmit($event)">
+          <fieldset>
+            <fieldset class="form-group">
+              <input
+                type="text"
+                placeholder="Username"
+                formControlName="username"
+                class="form-control form-control-lg"
+              />
+            </fieldset>
+            <fieldset class="form-group">
+              <input
+                type="text"
+                placeholder="Email"
+                formControlName="email"
+                class="form-control form-control-lg"
+              />
+            </fieldset>
+            <fieldset class="form-group">
+              <input
+                type="password"
+                placeholder="Password"
+                formControlName="password"
+                class="form-control form-control-lg"
+              />
+            </fieldset>
+            <button type="submit" class="btn btn-primary pull-xs-right">
+              Sign Up
+            </button>
+          </fieldset>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

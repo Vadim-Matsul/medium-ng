@@ -22,8 +22,11 @@ module.exports = {
   importOrderParserPlugins: ["typescript", "decorators-legacy"],
   importOrder: packages.concat('', [
     '(.*)module(.*)',
+    '',
     '(.*)component(.*)',
+    '',
     '(.*)service(.*)',
+    '',
     '<THIRD_PARTY_MODULES>',
   ]),
 };
