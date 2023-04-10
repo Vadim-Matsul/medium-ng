@@ -21,12 +21,11 @@ module.exports = {
   importOrderSortSpecifiers: true,
   importOrderParserPlugins: ["typescript", "decorators-legacy"],
   importOrder: packages.concat('', [
-    '(.*)module(.*)',
-    '',
-    '(.*)component(.*)',
-    '',
-    '(.*)service(.*)',
-    '',
+    '(.*).module(.*)',
+    '(.*).component(.*)',
+    '(.*).service(.*)',
+    '(.*).action(.*)',
+    '(.*).model(.*)',
     '<THIRD_PARTY_MODULES>',
   ]),
 };

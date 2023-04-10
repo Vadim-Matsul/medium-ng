@@ -1,7 +1,10 @@
 import { Component, type OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, Validators, type FormGroup } from '@angular/forms';
+import { Store } from '@ngrx/store';
 
 import { AuthLinks } from '../../auth.module';
+import { registerAction } from '../../store/actions/register.action';
+import { registerFormDataSchema } from './register.model';
 
 @Component({
   selector: 'ma-register',
@@ -12,7 +15,7 @@ export class RegisterComponent implements OnInit {
   AuthLinks = AuthLinks;
   form: FormGroup;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private store: Store) {}
 
   ngOnInit() {
     this.initializeForm();
@@ -26,5 +29,8 @@ export class RegisterComponent implements OnInit {
     });
   }
 
-  formSubmit(event: SubmitEvent) {}
+  formSubmit(event: SubmitEvent) {
+    const value = registerFormDataSchema.parse(this.form.value);
+    this.store.dispatch(registerAction(value));
+  }
 }
