@@ -1,10 +1,13 @@
 import { Component, type OnInit } from '@angular/core';
 import { FormBuilder, Validators, type FormGroup } from '@angular/forms';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
+import { Observable } from 'rxjs';
 
 import { AuthLinks } from '../../auth.module';
 import { registerAction } from '../../store/actions/register.action';
-import { registerFormDataSchema } from './register.model';
+import { AuthStateModel } from '../../models/authState.model';
+import { registerFormModelSchema } from '../../models/register.model';
+import { isSubmittingSelector } from '../../store/selectors';
 
 @Component({
   selector: 'ma-register',
@@ -14,11 +17,13 @@ import { registerFormDataSchema } from './register.model';
 export class RegisterComponent implements OnInit {
   AuthLinks = AuthLinks;
   form: FormGroup;
+  isSubmitting$: Observable<boolean>;
 
-  constructor(private fb: FormBuilder, private store: Store) {}
+  constructor(private fb: FormBuilder, private store: Store<AuthStateModel>) {}
 
   ngOnInit() {
     this.initializeForm();
+    this.initializeValues();
   }
 
   private initializeForm() {
@@ -29,8 +34,12 @@ export class RegisterComponent implements OnInit {
     });
   }
 
+  private initializeValues() {
+    this.isSubmitting$ = this.store.pipe(select(isSubmittingSelector));
+  }
+
   formSubmit(event: SubmitEvent) {
-    const value = registerFormDataSchema.parse(this.form.value);
+    const value = registerFormModelSchema.parse(this.form.value);
     this.store.dispatch(registerAction(value));
   }
 }

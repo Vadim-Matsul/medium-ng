@@ -1,9 +1,9 @@
 import { createAction, props } from '@ngrx/store';
 
-import { type RegisterFormData } from '../../components/register/register.model';
 import { ActionTypes } from '../actionTypes';
+import { type RegisterFormModel } from '../../models/register.model';
 
 export const registerAction = createAction(
   ActionTypes.REGISTER,
-  props<RegisterFormData>()
+  props<RegisterFormModel>()
 );

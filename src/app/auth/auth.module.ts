@@ -5,6 +5,8 @@ import { RouterModule, type Routes } from '@angular/router';
 import { StoreModule } from '@ngrx/store';
 
 import { RegisterComponent } from './components/register/register.component';
+import { StoreSlices } from '../shared/store/slices';
+import { reducers } from './store/reducers';
 
 export const AuthLinks = {
   Register: 'register',
@@ -20,7 +22,7 @@ const routes: Routes = [
     CommonModule,
     RouterModule.forChild(routes),
     ReactiveFormsModule,
-    StoreModule.forRoot({}),
+    StoreModule.forFeature(StoreSlices.AUTH, reducers),
   ],
   declarations: [RegisterComponent],
 })

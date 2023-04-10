@@ -34,7 +34,11 @@
                 class="form-control form-control-lg"
               />
             </fieldset>
-            <button type="submit" class="btn btn-primary pull-xs-right">
+            <button
+              type="submit"
+              [disabled]="isSubmitting$ | async"
+              class="btn btn-primary pull-xs-right"
+            >
               Sign Up
             </button>
           </fieldset>
