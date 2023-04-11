@@ -8,6 +8,7 @@ import { StoreModule } from '@ngrx/store';
 import { RegisterComponent } from './components/register/register.component';
 import { AuthService } from './services/auth.service';
 import { RegisterEffect } from './store/effects/register.effect';
+import { ZodErrorPipe } from '../shared/pipes/zodError.pipe';
 import { StoreSlices } from '../shared/store/slices';
 import { reducers } from './store/reducers';
 
@@ -30,7 +31,7 @@ const routes: Routes = [
     EffectsModule.forFeature([RegisterEffect]),
     /** project */
   ],
-  declarations: [RegisterComponent],
+  declarations: [RegisterComponent, ZodErrorPipe],
   providers: [AuthService],
 })
 export class AuthModule {}

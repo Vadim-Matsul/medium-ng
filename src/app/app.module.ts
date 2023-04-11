@@ -26,6 +26,7 @@ import { environment } from 'src/environments/environment';
     AppRoutingModule,
     AuthModule,
   ],
+  exports: [],
   providers: [],
   bootstrap: [AppComponent],
 })

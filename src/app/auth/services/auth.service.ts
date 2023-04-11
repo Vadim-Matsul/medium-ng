@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { map, type Observable } from 'rxjs';
 
 import {
-  authRequestModelSchema,
   type AuthRequestModel,
   type AuthResponseModel,
 } from '../models/authHttp.model';
@@ -19,10 +18,9 @@ export class AuthService {
 
   register(data: AuthRequestModel): Observable<CurrentUserModel> {
     const api = environment.apiUrl + '/users';
-    const body = authRequestModelSchema.parse(data);
 
     return this.http
-      .post<AuthResponseModel>(api, body)
+      .post<AuthResponseModel>(api, data)
       .pipe(map((response) => currentUserModelSchema.parse(response.user)));
   }
 }

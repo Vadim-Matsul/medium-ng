@@ -1,4 +1,6 @@
 <div class="auth-page">
+  <!-- TODO: remove it -->
+  <a class="btn btn-primary" [routerLink]="['/']"> / </a>
   <div class="container page">
     <div class="row">
       <div class="col-md-6 col-xs-12 offset-md-3">
@@ -7,7 +9,7 @@
           <a [routerLink]="['/', AuthLinks.Login]">Have an account?</a>
         </p>
         <!-- TODO: add Backend errors component -->
-        Backend errors are here
+        Backend errors are here ==={{ formErrors$ | zodError | async }}===
         <form [formGroup]="form" (ngSubmit)="formSubmit($event)">
           <fieldset>
             <fieldset class="form-group">
@@ -20,7 +22,7 @@
             </fieldset>
             <fieldset class="form-group">
               <input
-                type="text"
+                type="email"
                 placeholder="Email"
                 formControlName="email"
                 class="form-control form-control-lg"
