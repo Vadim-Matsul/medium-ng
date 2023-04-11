@@ -10,8 +10,8 @@ const initialState: AuthStateModel = {
 
 const authReducer = createReducer<AuthStateModel>(
   initialState,
-  on(registerAction, state =>
-    produce(state, draft => {
+  on(registerAction, (state) =>
+    produce(state, (draft) => {
       draft.isSubmitting = true;
     })
   )

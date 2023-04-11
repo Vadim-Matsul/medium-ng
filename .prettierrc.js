@@ -13,7 +13,8 @@ module.exports = {
   trailingComma: 'es5',
   bracketSpacing: true,
   bracketSameLine: false,
-  arrowParens: 'avoid',
+  arrowParens: 'always',
+  proseWrap: 'never',
   endOfLine: 'lf',
 
   importOrderSeparation: false,
@@ -25,6 +26,7 @@ module.exports = {
     '(.*).component(.*)',
     '(.*).service(.*)',
     '(.*).action(.*)',
+    '(.*).effect(.*)',
     '(.*).model(.*)',
     '<THIRD_PARTY_MODULES>',
   ]),

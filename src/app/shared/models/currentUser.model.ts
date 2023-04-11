@@ -9,7 +9,7 @@ export const currentUserModelSchema = z.object({
     .string()
     .nullable()
     .refine(
-      value => {
+      (value) => {
         if (!value) return true;
         return /^https(.*)\.(jpg|jpeg|png)$/i.test(value);
       },

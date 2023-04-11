@@ -1,9 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, map } from 'rxjs';
+import { map, type Observable } from 'rxjs';
 
-import { type AuthResponseModel } from '../models/authResponse.model';
-import { type RegisterFormModel } from '../models/register.model';
+import {
+  authRequestModelSchema,
+  type AuthRequestModel,
+  type AuthResponseModel,
+} from '../models/authHttp.model';
 import {
   currentUserModelSchema,
   type CurrentUserModel,
@@ -14,11 +17,12 @@ import { environment } from 'src/environments/environment';
 export class AuthService {
   constructor(private http: HttpClient) {}
 
-  register(data: RegisterFormModel): Observable<CurrentUserModel> {
+  register(data: AuthRequestModel): Observable<CurrentUserModel> {
     const api = environment.apiUrl + '/users';
+    const body = authRequestModelSchema.parse(data);
 
     return this.http
-      .post<AuthResponseModel>(api, data)
-      .pipe(map(response => currentUserModelSchema.parse(response.user)));
+      .post<AuthResponseModel>(api, body)
+      .pipe(map((response) => currentUserModelSchema.parse(response.user)));
   }
 }
