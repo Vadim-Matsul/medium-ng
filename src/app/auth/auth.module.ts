@@ -5,10 +5,11 @@ import { RouterModule, type Routes } from '@angular/router';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 
+import { ErrorMessagesModule } from '../shared/modules/errorMessages/errorMessages.module';
 import { RegisterComponent } from './components/register/register.component';
+import { ZodService } from '../shared/services/zod.service';
 import { AuthService } from './services/auth.service';
 import { RegisterEffect } from './store/effects/register.effect';
-import { ZodErrorPipe } from '../shared/pipes/zodError.pipe';
 import { StoreSlices } from '../shared/store/slices';
 import { reducers } from './store/reducers';
 
@@ -30,8 +31,9 @@ const routes: Routes = [
     StoreModule.forFeature(StoreSlices.AUTH, reducers),
     EffectsModule.forFeature([RegisterEffect]),
     /** project */
+    ErrorMessagesModule,
   ],
-  declarations: [RegisterComponent, ZodErrorPipe],
-  providers: [AuthService],
+  declarations: [RegisterComponent],
+  providers: [AuthService, ZodService],
 })
 export class AuthModule {}

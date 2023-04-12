@@ -8,8 +8,12 @@
         <p class="text-xs-center">
           <a [routerLink]="['/', AuthLinks.Login]">Have an account?</a>
         </p>
-        <!-- TODO: add Backend errors component -->
-        Backend errors are here ==={{ formErrors$ | zodError | async }}===
+        <ng-container *ngIf="errorMessages$ | async">
+          <ma-error-messages
+            [errorMessages]="errorMessages$ | async"
+          ></ma-error-messages>
+        </ng-container>
+
         <form [formGroup]="form" (ngSubmit)="formSubmit($event)">
           <fieldset>
             <fieldset class="form-group">

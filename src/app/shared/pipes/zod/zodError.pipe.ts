@@ -1,6 +1,6 @@
 import { Pipe, type PipeTransform } from '@angular/core';
 import { map, type Observable } from 'rxjs';
-import { SafeParseReturnType } from 'zod';
+import { type SafeParseReturnType } from 'zod';
 
 type InputPipe = Observable<
   SafeParseReturnType<Record<string, string>, Record<string, string>>

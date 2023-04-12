@@ -1,19 +1,20 @@
 import { Component, type OnInit } from '@angular/core';
 import { FormBuilder, Validators, type FormGroup } from '@angular/forms';
 import { Store, select } from '@ngrx/store';
-import { type Observable } from 'rxjs';
-import { debounceTime, map } from 'rxjs/operators';
-import { type SafeParseReturnType } from 'zod';
+import { combineLatest, type Observable } from 'rxjs';
+import { debounceTime, map, shareReplay } from 'rxjs/operators';
 
 import { AuthLinks } from '../../auth.module';
+import { ZodService } from 'src/app/shared/services/zod.service';
 import { registerAction } from '../../store/actions/register.action';
 import { authRequestModelSchema } from '../../models/authHttp.model';
 import { type AuthStateModel } from '../../models/authState.model';
+import { registerFormModelSchema } from '../../models/register.model';
+import { type BackendErrorsModel } from 'src/app/shared/models/backendErrors.model';
 import {
-  registerFormModelSchema,
-  type RegisterFormModel,
-} from '../../models/register.model';
-import { isSubmittingSelector } from '../../store/selectors';
+  errorMessagesSelector,
+  isSubmittingSelector,
+} from '../../store/selectors';
 
 @Component({
   selector: 'ma-register',
@@ -24,11 +25,13 @@ export class RegisterComponent implements OnInit {
   AuthLinks = AuthLinks;
   form: FormGroup;
   isSubmitting$: Observable<boolean>;
-  formErrors$: Observable<
-    SafeParseReturnType<RegisterFormModel, RegisterFormModel>
-  >;
+  errorMessages$: Observable<BackendErrorsModel | null>;
 
-  constructor(private fb: FormBuilder, private store: Store<AuthStateModel>) {}
+  constructor(
+    private fb: FormBuilder,
+    private store: Store<AuthStateModel>,
+    private zodService: ZodService
+  ) {}
 
   ngOnInit() {
     this.initializeForm();
@@ -41,15 +44,44 @@ export class RegisterComponent implements OnInit {
       email: ['', Validators.required],
       password: ['', Validators.required],
     });
-
-    this.formErrors$ = this.form.valueChanges.pipe(
-      debounceTime(300),
-      map((value) => registerFormModelSchema.safeParse(value))
-    );
   }
 
   private initializeValues() {
     this.isSubmitting$ = this.store.pipe(select(isSubmittingSelector));
+    this.bindErrorsStream();
+  }
+
+  private bindErrorsStream() {
+    const backendFormErrors$ = this.store.pipe(select(errorMessagesSelector));
+
+    const userFormErrors$ = this.form.valueChanges.pipe(
+      debounceTime(300),
+      map((formValues: Record<string, string>) =>
+        Object.fromEntries(
+          Object.entries(formValues).filter(([_, value]) => Boolean(value))
+        )
+      ),
+      map((activeFormFields) =>
+        this.zodService.getErrorsMap(
+          registerFormModelSchema.safeParse(activeFormFields)
+        )
+      )
+    );
+
+    this.errorMessages$ = combineLatest([
+      backendFormErrors$,
+      userFormErrors$,
+    ]).pipe(
+      map(([backendErrors, userErrors]) => {
+        const errorsMap = {
+          ...(backendErrors ?? {}),
+          ...(userErrors ?? {}),
+        };
+
+        return Object.keys(errorsMap).length ? errorsMap : null;
+      }),
+      shareReplay({ bufferSize: 1, refCount: true })
+    );
   }
 
   formSubmit(event: SubmitEvent) {
