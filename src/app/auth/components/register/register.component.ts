@@ -4,12 +4,12 @@ import { Store, select } from '@ngrx/store';
 import { combineLatest, type Observable } from 'rxjs';
 import { debounceTime, map, shareReplay } from 'rxjs/operators';
 
-import { AuthLinks } from '../../auth.module';
+import { AuthLinks } from '../../auth-routing.module';
 import { ZodService } from 'src/app/shared/services/zod.service';
-import { registerAction } from '../../store/actions/register.action';
-import { authRequestModelSchema } from '../../models/authHttp.model';
+import { registerAction } from '../../store/actions/register.actions';
 import { type AuthStateModel } from '../../models/authState.model';
-import { registerFormModelSchema } from '../../models/register.model';
+import { registerFormModelSchema } from '../../models/register/register.model';
+import { registerRequestModelSchema } from '../../models/register/registerHttp.model';
 import { type BackendErrorsModel } from 'src/app/shared/models/backendErrors.model';
 import {
   errorMessagesSelector,
@@ -85,7 +85,7 @@ export class RegisterComponent implements OnInit {
   }
 
   formSubmit(event: SubmitEvent) {
-    const request = authRequestModelSchema.parse({ user: this.form.value });
+    const request = registerRequestModelSchema.parse({ user: this.form.value });
     this.store.dispatch(registerAction({ request }));
   }
 }

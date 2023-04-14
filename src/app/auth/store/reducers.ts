@@ -2,10 +2,15 @@ import { createReducer, on, type Action } from '@ngrx/store';
 import produce from 'immer';
 
 import {
+  loginAction,
+  loginFailureAction,
+  loginSuccessAction,
+} from './actions/login.actions';
+import {
   registerAction,
   registerFailureAction,
   registerSuccessAction,
-} from './actions/register.action';
+} from './actions/register.actions';
 import { type AuthStateModel } from '../models/authState.model';
 
 const initialState: AuthStateModel = {
@@ -31,6 +36,25 @@ const authReducer = createReducer<AuthStateModel>(
     })
   ),
   on(registerFailureAction, (state, { errors }) =>
+    produce(state, (draft) => {
+      draft.isSubmitting = false;
+      draft.validationErrors = errors;
+    })
+  ),
+  on(loginAction, (state) =>
+    produce(state, (draft) => {
+      draft.isSubmitting = true;
+      draft.validationErrors = null;
+    })
+  ),
+  on(loginSuccessAction, (state, { currentUser }) =>
+    produce(state, (draft) => {
+      draft.isLoggedIn = true;
+      draft.isSubmitting = false;
+      draft.currentUser = currentUser;
+    })
+  ),
+  on(loginFailureAction, (state, { errors }) =>
     produce(state, (draft) => {
       draft.isSubmitting = false;
       draft.validationErrors = errors;

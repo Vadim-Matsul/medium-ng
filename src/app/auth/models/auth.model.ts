@@ -1,13 +1,23 @@
 import { z } from 'zod';
 
-import { registerFormModelSchema } from './register.model';
 import { backendErrorsModelSchema } from 'src/app/shared/models/backendErrors.model';
 import { currentUserModelSchema } from 'src/app/shared/models/currentUser.model';
+import { RegExpKeys, RegExpMap } from 'src/app/shared/common/regExp';
 
-export const authRequestModelSchema = z.object({
-  user: registerFormModelSchema,
+export const formPasswordModelSchema = z.object({
+  password: z
+    .string()
+    .min(8, 'Min password length 8 characters')
+    .refine(
+      (value) => {
+        if (!value) return false;
+        return RegExpMap[RegExpKeys.isCorrectPassword](value);
+      },
+      {
+        message: 'password must contain letters and numbers',
+      }
+    ),
 });
-export type AuthRequestModel = z.infer<typeof authRequestModelSchema>;
 
 export const authResponseModelSchema = z.object({
   user: currentUserModelSchema,

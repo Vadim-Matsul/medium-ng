@@ -1,38 +1,29 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
-import { RouterModule, type Routes } from '@angular/router';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 
 import { ErrorMessagesModule } from '../shared/modules/errorMessages/errorMessages.module';
+import { AuthRoutingModule } from './auth-routing.module';
 import { RegisterComponent } from './components/register/register.component';
 import { PersistentService } from '../shared/services/persistent.service';
 import { ZodService } from '../shared/services/zod.service';
 import { AuthService } from './services/auth.service';
+import { LoginEffect } from './store/effects/login.effect';
 import { RegisterEffect } from './store/effects/register.effect';
 import { StoreSlices } from '../shared/store/slices';
 import { reducers } from './store/reducers';
-
-export const AuthLinks = {
-  Home: '/',
-  Register: 'register',
-  Login: 'login',
-} as const;
-
-const routes: Routes = [
-  { path: AuthLinks.Register, component: RegisterComponent },
-];
 
 @NgModule({
   imports: [
     /** system */
     CommonModule,
-    RouterModule.forChild(routes),
     ReactiveFormsModule,
     StoreModule.forFeature(StoreSlices.AUTH, reducers),
-    EffectsModule.forFeature([RegisterEffect]),
+    EffectsModule.forFeature([RegisterEffect, LoginEffect]),
     /** project */
+    AuthRoutingModule,
     ErrorMessagesModule,
   ],
   declarations: [RegisterComponent],

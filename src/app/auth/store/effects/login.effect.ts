@@ -2,38 +2,37 @@ import { Injectable } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { of } from 'rxjs';
-import { catchError, exhaustMap, map, tap } from 'rxjs/operators';
+import { catchError, exhaustMap, map, of, tap } from 'rxjs';
 
 import { AuthLinks } from './../../auth-routing.module';
 import { PersistentService } from './../../../shared/services/persistent.service';
 import { AuthService } from './../../services/auth.service';
 import {
-  registerAction,
-  registerFailureAction,
-  registerSuccessAction,
-} from '../actions/register.actions';
+  loginAction,
+  loginFailureAction,
+  loginSuccessAction,
+} from '../actions/login.actions';
 import { authBackendErrorsModelSchema } from '../../models/auth.model';
 import { StorageKeys } from 'src/app/shared/common/storage';
 
 @Injectable()
-export class RegisterEffect {
-  register$ = createEffect(() => {
+export class LoginEffect {
+  login$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(registerAction),
+      ofType(loginAction),
       exhaustMap(({ request }) => {
-        return this.authService.register(request).pipe(
+        return this.authService.login(request).pipe(
           map((currentUser) => {
             this.persistentService.set<string>(
               StorageKeys.Token,
               currentUser.token
             );
 
-            return registerSuccessAction({ currentUser });
+            return loginSuccessAction({ currentUser });
           }),
-          catchError((_errors: HttpErrorResponse) => {
-            const errors = authBackendErrorsModelSchema.parse(_errors.error);
-            return of(registerFailureAction(errors));
+          catchError((_error: HttpErrorResponse) => {
+            const errors = authBackendErrorsModelSchema.parse(_error.error);
+            return of(loginFailureAction(errors));
           })
         );
       })
@@ -43,7 +42,7 @@ export class RegisterEffect {
   redirectToHome$ = createEffect(
     () => {
       return this.actions$.pipe(
-        ofType(registerSuccessAction),
+        ofType(loginSuccessAction),
         tap(() => {
           this.router.navigateByUrl(AuthLinks.Home);
         })

@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { map, type Observable } from 'rxjs';
+import { map } from 'rxjs';
 
-import {
-  type AuthRequestModel,
-  type AuthResponseModel,
-} from '../models/authHttp.model';
+import { type AuthResponseModel } from '../models/auth.model';
+import { type LoginRequestModel } from '../models/login/loginHttp.model';
+import { type RegisterRequestModel } from '../models/register/registerHttp.model';
 import {
   currentUserModelSchema,
   type CurrentUserModel,
@@ -16,11 +15,18 @@ import { environment } from 'src/environments/environment';
 export class AuthService {
   constructor(private http: HttpClient) {}
 
-  register(data: AuthRequestModel): Observable<CurrentUserModel> {
-    const api = environment.apiUrl + '/users';
+  private getUser(response: AuthResponseModel): CurrentUserModel {
+    // TODO: add logic for bad parse
+    return currentUserModelSchema.parse(response.user);
+  }
 
-    return this.http
-      .post<AuthResponseModel>(api, data)
-      .pipe(map((response) => currentUserModelSchema.parse(response.user)));
+  register(data: RegisterRequestModel) {
+    const api = environment.apiUrl + '/users';
+    return this.http.post<AuthResponseModel>(api, data).pipe(map(this.getUser));
+  }
+
+  login(data: LoginRequestModel) {
+    const api = environment.apiUrl + '/users';
+    return this.http.post<AuthResponseModel>(api, data).pipe(map(this.getUser));
   }
 }
