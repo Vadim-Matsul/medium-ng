@@ -7,6 +7,7 @@ import { StoreModule } from '@ngrx/store';
 
 import { ErrorMessagesModule } from '../shared/modules/errorMessages/errorMessages.module';
 import { RegisterComponent } from './components/register/register.component';
+import { PersistentService } from '../shared/services/persistent.service';
 import { ZodService } from '../shared/services/zod.service';
 import { AuthService } from './services/auth.service';
 import { RegisterEffect } from './store/effects/register.effect';
@@ -14,6 +15,7 @@ import { StoreSlices } from '../shared/store/slices';
 import { reducers } from './store/reducers';
 
 export const AuthLinks = {
+  Home: '/',
   Register: 'register',
   Login: 'login',
 } as const;
@@ -34,6 +36,6 @@ const routes: Routes = [
     ErrorMessagesModule,
   ],
   declarations: [RegisterComponent],
-  providers: [AuthService, ZodService],
+  providers: [AuthService, ZodService, PersistentService],
 })
 export class AuthModule {}
