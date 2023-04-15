@@ -9,7 +9,6 @@ import {
   type Observable,
 } from 'rxjs';
 
-import { AuthLinks } from './../../auth-routing.module';
 import { ZodService } from 'src/app/shared/services/zod.service';
 import { loginAction } from '../../store/actions/login.actions';
 import { loginFormModelSchema } from '../../models/login/login.model';
@@ -19,6 +18,7 @@ import {
   errorMessagesSelector,
   isSubmittingSelector,
 } from '../../store/selectors';
+import { HttpLinks } from 'src/app/shared/common/httpLinks';
 
 @Component({
   selector: 'ma-login',
@@ -26,7 +26,7 @@ import {
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-  AuthLinks = AuthLinks;
+  HttpLinks = HttpLinks;
   form: FormGroup;
   errorMessages$: Observable<BackendErrorsModel | null>;
   isSubmitting$: Observable<boolean>;

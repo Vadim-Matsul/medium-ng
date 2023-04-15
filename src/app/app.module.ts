@@ -7,6 +7,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AuthModule } from './auth/auth.module';
+import { TopBarModule } from './shared/modules/topBar/topBar.module';
 import { AppComponent } from './app.component';
 import { environment } from 'src/environments/environment';
 
@@ -25,6 +26,7 @@ import { environment } from 'src/environments/environment';
     /** project */
     AppRoutingModule,
     AuthModule,
+    TopBarModule,
   ],
   exports: [],
   providers: [],

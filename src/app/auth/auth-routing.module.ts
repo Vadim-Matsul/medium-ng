@@ -3,16 +3,11 @@ import { RouterModule, type Routes } from '@angular/router';
 
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
-
-export enum AuthLinks {
-  Home = '/',
-  Register = 'register',
-  Login = 'login',
-}
+import { HttpLinks } from '../shared/common/httpLinks';
 
 const routes: Routes = [
-  { path: AuthLinks.Register, component: RegisterComponent },
-  { path: AuthLinks.Login, component: LoginComponent },
+  { path: HttpLinks.Register, component: RegisterComponent },
+  { path: HttpLinks.Login, component: LoginComponent },
 ];
 
 @NgModule({

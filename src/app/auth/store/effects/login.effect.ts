@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpErrorResponse } from '@angular/common/http';
+import { type HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, exhaustMap, map, of, tap } from 'rxjs';
 
-import { AuthLinks } from './../../auth-routing.module';
 import { PersistentService } from './../../../shared/services/persistent.service';
 import { AuthService } from './../../services/auth.service';
 import {
@@ -13,6 +12,7 @@ import {
   loginSuccessAction,
 } from '../actions/login.actions';
 import { authBackendErrorsModelSchema } from '../../models/auth.model';
+import { HttpLinks } from 'src/app/shared/common/httpLinks';
 import { StorageKeys } from 'src/app/shared/common/storage';
 
 @Injectable()
@@ -44,7 +44,7 @@ export class LoginEffect {
       return this.actions$.pipe(
         ofType(loginSuccessAction),
         tap(() => {
-          this.router.navigateByUrl(AuthLinks.Home);
+          this.router.navigateByUrl(HttpLinks.Home);
         })
       );
     },

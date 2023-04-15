@@ -1,12 +1,10 @@
 <section class="auth-page">
-  <!-- TODO: remove it -->
-  <a class="btn btn-primary" [routerLink]="['/']"> / </a>
   <div class="container page">
     <div class="row">
       <div class="col-md-6 col-xs-12 offset-md-3">
         <h1 class="text-xs-center">Sign Up</h1>
         <p class="text-xs-center">
-          <a [routerLink]="['/', AuthLinks.Login]">Have an account?</a>
+          <a [routerLink]="['/', HttpLinks.Login]">Have an account?</a>
         </p>
 
         <ng-container *ngIf="errorMessages$ | async">

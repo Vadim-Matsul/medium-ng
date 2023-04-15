@@ -4,7 +4,6 @@ import { Store, select } from '@ngrx/store';
 import { combineLatest, type Observable } from 'rxjs';
 import { debounceTime, map, shareReplay } from 'rxjs/operators';
 
-import { AuthLinks } from '../../auth-routing.module';
 import { ZodService } from 'src/app/shared/services/zod.service';
 import { registerAction } from '../../store/actions/register.actions';
 import { type AuthStateModel } from '../../models/authState.model';
@@ -15,6 +14,7 @@ import {
   errorMessagesSelector,
   isSubmittingSelector,
 } from '../../store/selectors';
+import { HttpLinks } from 'src/app/shared/common/httpLinks';
 
 @Component({
   selector: 'ma-register',
@@ -22,7 +22,7 @@ import {
   styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent implements OnInit {
-  AuthLinks = AuthLinks;
+  HttpLinks = HttpLinks;
   form: FormGroup;
   isSubmitting$: Observable<boolean>;
   errorMessages$: Observable<BackendErrorsModel | null>;

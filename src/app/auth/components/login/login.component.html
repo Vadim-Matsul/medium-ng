@@ -4,7 +4,7 @@
       <div class="col col-xs-12 col-md-6 offset-md-3">
         <h1 class="text-xs-center">Sign In</h1>
         <p class="text-xs-center">
-          <a [routerLink]="['/', AuthLinks.Register]">Need an account?</a>
+          <a [routerLink]="['/', HttpLinks.Register]">Need an account?</a>
         </p>
 
         <ng-container *ngIf="errorMessages$ | async">
