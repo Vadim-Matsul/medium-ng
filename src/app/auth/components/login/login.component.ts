@@ -1,15 +1,19 @@
 import { Component, type OnInit } from '@angular/core';
 import { FormBuilder, Validators, type FormGroup } from '@angular/forms';
 import { Store, select } from '@ngrx/store';
-import { combineLatest, type Observable } from 'rxjs';
-import { debounceTime, map, shareReplay } from 'rxjs/operators';
+import {
+  combineLatest,
+  debounceTime,
+  map,
+  shareReplay,
+  type Observable,
+} from 'rxjs';
 
-import { AuthLinks } from '../../auth-routing.module';
+import { AuthLinks } from './../../auth-routing.module';
 import { ZodService } from 'src/app/shared/services/zod.service';
-import { registerAction } from '../../store/actions/register.actions';
-import { type AuthStateModel } from '../../models/authState.model';
-import { registerFormModelSchema } from '../../models/register/register.model';
-import { registerRequestModelSchema } from '../../models/register/registerHttp.model';
+import { loginAction } from '../../store/actions/login.actions';
+import { loginFormModelSchema } from '../../models/login/login.model';
+import { loginRequestModelSchema } from '../../models/login/loginHttp.model';
 import { type BackendErrorsModel } from 'src/app/shared/models/backendErrors.model';
 import {
   errorMessagesSelector,
@@ -17,39 +21,38 @@ import {
 } from '../../store/selectors';
 
 @Component({
-  selector: 'ma-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss'],
+  selector: 'ma-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.scss'],
 })
-export class RegisterComponent implements OnInit {
+export class LoginComponent implements OnInit {
   AuthLinks = AuthLinks;
   form: FormGroup;
-  isSubmitting$: Observable<boolean>;
   errorMessages$: Observable<BackendErrorsModel | null>;
+  isSubmitting$: Observable<boolean>;
 
   constructor(
     private fb: FormBuilder,
-    private store: Store<AuthStateModel>,
+    private store: Store,
     private zodService: ZodService
   ) {}
 
   ngOnInit() {
-    this.initializeForm();
     this.initializeValues();
+    this.initializeForm();
+  }
+
+  private initializeValues() {
+    this.isSubmitting$ = this.store.select(isSubmittingSelector);
   }
 
   private initializeForm() {
     this.form = this.fb.group({
-      username: ['', Validators.required],
       email: ['', Validators.required],
       password: ['', Validators.required],
     });
 
     this.bindErrorsStream();
-  }
-
-  private initializeValues() {
-    this.isSubmitting$ = this.store.pipe(select(isSubmittingSelector));
   }
 
   private bindErrorsStream() {
@@ -64,7 +67,7 @@ export class RegisterComponent implements OnInit {
       ),
       map((activeFormFields) =>
         this.zodService.getErrorsMap(
-          registerFormModelSchema.safeParse(activeFormFields)
+          loginFormModelSchema.safeParse(activeFormFields)
         )
       )
     );
@@ -74,19 +77,19 @@ export class RegisterComponent implements OnInit {
       userFormErrors$,
     ]).pipe(
       map(([backendErrors, userErrors]) => {
-        const errorsMap = {
+        const draft = {
           ...(backendErrors ?? {}),
           ...(userErrors ?? {}),
         };
 
-        return Object.keys(errorsMap).length ? errorsMap : null;
+        return Object.keys(draft).length ? draft : null;
       }),
       shareReplay({ refCount: true })
     );
   }
 
-  formSubmit(event: SubmitEvent) {
-    const request = registerRequestModelSchema.parse({ user: this.form.value });
-    this.store.dispatch(registerAction({ request }));
+  onSubmit(event: SubmitEvent) {
+    const request = loginRequestModelSchema.parse({ user: this.form.value });
+    this.store.dispatch(loginAction({ request }));
   }
 }

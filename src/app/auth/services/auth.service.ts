@@ -26,7 +26,7 @@ export class AuthService {
   }
 
   login(data: LoginRequestModel) {
-    const api = environment.apiUrl + '/users';
+    const api = environment.apiUrl + '/users/login';
     return this.http.post<AuthResponseModel>(api, data).pipe(map(this.getUser));
   }
 }

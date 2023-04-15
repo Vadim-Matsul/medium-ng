@@ -1,12 +1,10 @@
 <section class="auth-page">
-  <!-- TODO: remove it -->
-  <a class="btn btn-primary" [routerLink]="['/']"> / </a>
   <div class="container page">
     <div class="row">
-      <div class="col-md-6 col-xs-12 offset-md-3">
-        <h1 class="text-xs-center">Sign Up</h1>
+      <div class="col col-xs-12 col-md-6 offset-md-3">
+        <h1 class="text-xs-center">Sign In</h1>
         <p class="text-xs-center">
-          <a [routerLink]="['/', AuthLinks.Login]">Have an account?</a>
+          <a [routerLink]="['/', AuthLinks.Register]">Need an account?</a>
         </p>
 
         <ng-container *ngIf="errorMessages$ | async">
@@ -15,16 +13,8 @@
           ></ma-error-messages>
         </ng-container>
 
-        <form [formGroup]="form" (ngSubmit)="formSubmit($event)">
+        <form [formGroup]="form" (ngSubmit)="onSubmit($event)">
           <fieldset>
-            <fieldset class="form-group">
-              <input
-                type="text"
-                placeholder="Username"
-                formControlName="username"
-                class="form-control form-control-lg"
-              />
-            </fieldset>
             <fieldset class="form-group">
               <input
                 type="email"
@@ -46,7 +36,7 @@
               [disabled]="isSubmitting$ | async"
               class="btn btn-primary pull-xs-right"
             >
-              Sign Up
+              Sign In
             </button>
           </fieldset>
         </form>

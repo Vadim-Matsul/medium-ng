@@ -6,6 +6,7 @@ import { StoreModule } from '@ngrx/store';
 
 import { ErrorMessagesModule } from '../shared/modules/errorMessages/errorMessages.module';
 import { AuthRoutingModule } from './auth-routing.module';
+import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { PersistentService } from '../shared/services/persistent.service';
 import { ZodService } from '../shared/services/zod.service';
@@ -26,7 +27,7 @@ import { reducers } from './store/reducers';
     AuthRoutingModule,
     ErrorMessagesModule,
   ],
-  declarations: [RegisterComponent],
+  declarations: [RegisterComponent, LoginComponent],
   providers: [AuthService, ZodService, PersistentService],
 })
 export class AuthModule {}
