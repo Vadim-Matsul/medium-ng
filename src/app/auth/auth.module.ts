@@ -11,6 +11,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { PersistentService } from '../shared/services/persistent.service';
 import { ZodService } from '../shared/services/zod.service';
 import { AuthService } from './services/auth.service';
+import { FetchUserEffect } from './store/effects/fetchUser.effect';
 import { LoginEffect } from './store/effects/login.effect';
 import { RegisterEffect } from './store/effects/register.effect';
 import { StoreSlices } from '../shared/store/slices';
@@ -22,7 +23,7 @@ import { reducers } from './store/reducers';
     CommonModule,
     ReactiveFormsModule,
     StoreModule.forFeature(StoreSlices.AUTH, reducers),
-    EffectsModule.forFeature([RegisterEffect, LoginEffect]),
+    EffectsModule.forFeature([RegisterEffect, LoginEffect, FetchUserEffect]),
     /** project */
     AuthRoutingModule,
     ErrorMessagesModule,

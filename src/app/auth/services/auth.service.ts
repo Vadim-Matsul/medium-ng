@@ -16,7 +16,6 @@ export class AuthService {
   constructor(private http: HttpClient) {}
 
   private getUser(response: AuthResponseModel): CurrentUserModel {
-    // TODO: add logic for bad parse
     return currentUserModelSchema.parse(response.user);
   }
 
@@ -28,5 +27,10 @@ export class AuthService {
   login(data: LoginRequestModel) {
     const api = environment.apiUrl + '/users/login';
     return this.http.post<AuthResponseModel>(api, data).pipe(map(this.getUser));
+  }
+
+  fetchUserByToken() {
+    const api = environment.apiUrl + '/user';
+    return this.http.get<AuthResponseModel>(api).pipe(map(this.getUser));
   }
 }

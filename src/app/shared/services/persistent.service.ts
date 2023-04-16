@@ -15,7 +15,7 @@ export class PersistentService {
       const data = localStorage.getItem(key);
 
       if (data === null) {
-        throw new Error('empty data from localStorage');
+        return null;
       }
 
       return JSON.parse(data);

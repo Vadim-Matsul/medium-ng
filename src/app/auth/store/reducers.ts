@@ -2,6 +2,11 @@ import { createReducer, on, type Action } from '@ngrx/store';
 import produce from 'immer';
 
 import {
+  fetchUserAction,
+  fetchUserFailureAction,
+  fetchUserSuccessAction,
+} from './actions/fetchUser.actions';
+import {
   loginAction,
   loginFailureAction,
   loginSuccessAction,
@@ -15,6 +20,7 @@ import { type AuthStateModel } from '../models/authState.model';
 
 const initialState: AuthStateModel = {
   isSubmitting: false,
+  isLoading: false,
   currentUser: null,
   isLoggedIn: null,
   validationErrors: null,
@@ -22,6 +28,7 @@ const initialState: AuthStateModel = {
 
 const authReducer = createReducer<AuthStateModel>(
   initialState,
+  /** --- REGISTER --- */
   on(registerAction, (state) =>
     produce(state, (draft) => {
       draft.isSubmitting = true;
@@ -41,6 +48,7 @@ const authReducer = createReducer<AuthStateModel>(
       draft.validationErrors = errors;
     })
   ),
+  /** --- LOGIN --- */
   on(loginAction, (state) =>
     produce(state, (draft) => {
       draft.isSubmitting = true;
@@ -58,6 +66,26 @@ const authReducer = createReducer<AuthStateModel>(
     produce(state, (draft) => {
       draft.isSubmitting = false;
       draft.validationErrors = errors;
+    })
+  ),
+  /** --- FETCH USER --- */
+  on(fetchUserAction, (state) =>
+    produce(state, (draft) => {
+      draft.isLoading = true;
+    })
+  ),
+  on(fetchUserSuccessAction, (state, { currentUser }) =>
+    produce(state, (draft) => {
+      draft.isLoading = false;
+      draft.isLoggedIn = true;
+      draft.currentUser = currentUser;
+    })
+  ),
+  on(fetchUserFailureAction, (state) =>
+    produce(state, (draft) => {
+      draft.isLoading = false;
+      draft.isLoggedIn = false;
+      draft.currentUser = null;
     })
   )
 );
