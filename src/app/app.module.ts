@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
@@ -9,6 +9,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AuthModule } from './auth/auth.module';
 import { TopBarModule } from './shared/modules/topBar/topBar.module';
 import { AppComponent } from './app.component';
+import { AuthInterceptor } from './shared/services/authInterceptor.service';
+import { PersistentService } from './shared/services/persistent.service';
 import { environment } from 'src/environments/environment';
 
 @NgModule({
@@ -29,7 +31,10 @@ import { environment } from 'src/environments/environment';
     TopBarModule,
   ],
   exports: [],
-  providers: [],
+  providers: [
+    PersistentService,
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
