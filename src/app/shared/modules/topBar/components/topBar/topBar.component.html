@@ -14,12 +14,12 @@
             [routerLink]="['/', HttpLinks.Posts, HttpLinks.NewPost]"
             class="nav-link"
           >
-            <i class="ion-compose"></i> &nbsp; New Post
+            <i class="ion-compose"></i> New Post
           </a>
         </li>
         <li class="nav-item">
           <a [routerLink]="['/', HttpLinks.Settings]" class="nav-link">
-            <i class="ion-gear-a"></i> &nbsp; Settings
+            <i class="ion-gear-a"></i> Settings
           </a>
         </li>
         <li class="nav-item">
@@ -32,7 +32,7 @@
             class="nav-link"
           >
             <img class="user-pic" [src]="(currentUser$ | async).image" />
-            &nbsp; {{ (currentUser$ | async).username }}
+            {{ (currentUser$ | async).username }}
           </a>
         </li>
       </ng-container>
