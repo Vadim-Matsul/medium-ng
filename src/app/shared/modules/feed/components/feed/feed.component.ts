@@ -1,4 +1,16 @@
-import { Component, type OnInit } from '@angular/core';
+import { Component, Input, type OnInit } from '@angular/core';
+import { Store, select } from '@ngrx/store';
+import { type Observable } from 'rxjs';
+
+import { getFeedAction } from '../../store/actions/getFeed.actions';
+import { type FeedStateModel } from '../../models/feedState.model';
+import {
+  errorSelector,
+  feedSelector,
+  isLoadingSelector,
+} from '../../store/selectors';
+import { HttpLinks } from 'src/app/shared/common/httpLinks';
+import { StoreEndpoints } from 'src/app/shared/store/endpoints';
 
 @Component({
   selector: 'ma-feed',
@@ -6,7 +18,28 @@ import { Component, type OnInit } from '@angular/core';
   styleUrls: ['./feed.component.scss'],
 })
 export class FeedComponent implements OnInit {
-  constructor() {}
+  HttpLinks = HttpLinks;
 
-  ngOnInit() {}
+  @Input('apiUrl') apiUrlProps: StoreEndpoints;
+
+  isLoading$: Observable<FeedStateModel['isLoading']>;
+  error$: Observable<FeedStateModel['error']>;
+  feed$: Observable<FeedStateModel['data']>;
+
+  constructor(private store: Store) {}
+
+  ngOnInit() {
+    this.bindFeedData();
+    this.initializeValues();
+  }
+
+  private bindFeedData() {
+    this.store.dispatch(getFeedAction({ shortUrl: this.apiUrlProps }));
+  }
+
+  private initializeValues() {
+    this.isLoading$ = this.store.pipe(select(isLoadingSelector));
+    this.error$ = this.store.pipe(select(errorSelector));
+    this.feed$ = this.store.pipe(select(feedSelector));
+  }
 }

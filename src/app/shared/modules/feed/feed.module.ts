@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 
@@ -13,6 +14,7 @@ import { reducers } from './store/reducer';
   imports: [
     /** system */
     CommonModule,
+    RouterModule,
     EffectsModule.forFeature([GetFeedEffect]),
     StoreModule.forFeature(StoreSlices.FEED, reducers),
     /** project */
