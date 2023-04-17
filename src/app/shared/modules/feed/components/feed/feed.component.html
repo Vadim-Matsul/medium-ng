@@ -33,8 +33,10 @@
         </div>
       </a>
     </article>
-    <!-- TODO: implement -->
-    PAGINATION IS HERE
+    <ma-pagination
+      [total]="(feed$ | async).articlesCount"
+      [currentPage]="currentPage$ | async"
+    ></ma-pagination>
   </ng-container>
 
   <ng-template #emptyFeed>

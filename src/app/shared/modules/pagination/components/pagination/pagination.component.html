@@ -1,0 +1,24 @@
+<section class="ma-pagination">
+  <button class="btn btn-success" (click)="onSlideLeft()">
+    <i class="ion-arrow-left-b"></i>
+  </button>
+
+  <ul class="pagination">
+    <li
+      *ngFor="let page of pages"
+      [ngClass]="{ active: currentPageProps === page }"
+      class="page-item w-10"
+    >
+      <a
+        [routerLink]="[baseUrl]"
+        [queryParams]="{ page: page }"
+        class="page-link"
+        >{{ page }}</a
+      >
+    </li>
+  </ul>
+
+  <button class="btn btn-success" (click)="onSlideRight()">
+    <i class="ion-arrow-right-b"></i>
+  </button>
+</section>

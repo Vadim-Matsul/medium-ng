@@ -1,0 +1,18 @@
+$button_offset: 15px;
+
+.ma-pagination {
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+
+  & button {
+    &:first-child {
+      margin-right: $button_offset;
+    }
+
+    &:last-child {
+      margin-left: $button_offset;
+    }
+  }
+}

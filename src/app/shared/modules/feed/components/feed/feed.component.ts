@@ -1,6 +1,7 @@
 import { Component, Input, type OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Store, select } from '@ngrx/store';
-import { type Observable } from 'rxjs';
+import { map, type Observable } from 'rxjs';
 
 import { getFeedAction } from '../../store/actions/getFeed.actions';
 import { type FeedStateModel } from '../../models/feedState.model';
@@ -25,8 +26,10 @@ export class FeedComponent implements OnInit {
   isLoading$: Observable<FeedStateModel['isLoading']>;
   error$: Observable<FeedStateModel['error']>;
   feed$: Observable<FeedStateModel['data']>;
+  currentPage$: Observable<number>;
+  baseUrl$: Observable<string>;
 
-  constructor(private store: Store) {}
+  constructor(private store: Store, private route: ActivatedRoute) {}
 
   ngOnInit() {
     this.bindFeedData();
@@ -41,5 +44,8 @@ export class FeedComponent implements OnInit {
     this.isLoading$ = this.store.pipe(select(isLoadingSelector));
     this.error$ = this.store.pipe(select(errorSelector));
     this.feed$ = this.store.pipe(select(feedSelector));
+    this.currentPage$ = this.route.queryParams.pipe(
+      map((params) => Number(params['page'] || '1'))
+    );
   }
 }
