@@ -4,6 +4,8 @@ import { RouterModule } from '@angular/router';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 
+import { ErrorMessagesModule } from '../errorMessages/errorMessages.module';
+import { LoaderModule } from '../loader/loader.module';
 import { FeedComponent } from './components/feed/feed.component';
 import { FeedService } from './services/feed.service';
 import { GetFeedEffect } from './store/effects/getFeed.effect';
@@ -18,6 +20,8 @@ import { reducers } from './store/reducer';
     EffectsModule.forFeature([GetFeedEffect]),
     StoreModule.forFeature(StoreSlices.FEED, reducers),
     /** project */
+    ErrorMessagesModule,
+    LoaderModule,
   ],
   declarations: [FeedComponent],
   providers: [FeedService],

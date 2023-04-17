@@ -1,38 +1,46 @@
-<!-- TODO: add loader -->
-<div *ngIf="isLoading$ | async">Loading...</div>
-<!-- TODO: add error -->
-<div *ngIf="error$ | async">Some error happened</div>
+<ma-loader *ngIf="isLoading$ | async; else feedContent"></ma-loader>
 
-<!-- TODO: add block on empty feed -->
-<ng-container *ngIf="!!(feed$ | async)">
-  <article
-    *ngFor="let article of (feed$ | async).articles"
-    class="article-preview"
-  >
-    <div class="article-meta">
-      <a [routerLink]="['/', HttpLinks.Profiles, article.author.username]">
-        <img [src]="article.author.image" />
-      </a>
-      <div class="info">
+<ng-template #feedContent>
+  <ng-container *ngIf="!!(feed$ | async); else emptyFeed">
+    <article
+      *ngFor="let article of (feed$ | async).articles"
+      class="article-preview"
+    >
+      <div class="article-meta">
         <a [routerLink]="['/', HttpLinks.Profiles, article.author.username]">
-          {{ article.author.username }}
+          <img [src]="article.author.image" />
         </a>
-        <span class="date">{{ article.createdAt | date }}</span>
+        <div class="info">
+          <a [routerLink]="['/', HttpLinks.Profiles, article.author.username]">
+            {{ article.author.username }}
+          </a>
+          <span class="date">{{ article.createdAt | date }}</span>
+        </div>
+        <div class="pull-xs-right">
+          <!-- TODO: implement -->
+          ADD TO FAVORITES
+        </div>
       </div>
-      <div class="pull-xs-right">
-        <!-- TODO: implement -->
-        ADD TO FAVORITES
-      </div>
-    </div>
-    <a [routerLink]="['/', HttpLinks.Posts, article.slug]" class="preview-link">
-      <h1>{{ article.title }}</h1>
-      <p>{{ article.description }}</p>
-      <div class="pull-xs-right">
-        <!-- TODO: implement -->
-        HERE IS LIST OF TAGS
-      </div>
-    </a>
-  </article>
-  <!-- TODO: implement -->
-  PAGINATION IS HERE
-</ng-container>
+      <a
+        [routerLink]="['/', HttpLinks.Posts, article.slug]"
+        class="preview-link"
+      >
+        <h1>{{ article.title }}</h1>
+        <p>{{ article.description }}</p>
+        <div class="pull-xs-right">
+          <!-- TODO: implement -->
+          HERE IS LIST OF TAGS
+        </div>
+      </a>
+    </article>
+    <!-- TODO: implement -->
+    PAGINATION IS HERE
+  </ng-container>
+
+  <ng-template #emptyFeed>
+    <ma-error-message
+      *ngIf="error$ | async"
+      [errorMessage]="'Posts are empty. Something went wrong...'"
+    ></ma-error-message>
+  </ng-template>
+</ng-template>

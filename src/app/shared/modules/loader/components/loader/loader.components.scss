@@ -1,0 +1,24 @@
+$circle-size: 50px;
+
+.loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+
+  & time {
+    width: $circle-size;
+    height: $circle-size;
+    border-radius: 50%;
+    border: calc($circle-size * 0.1) solid rgb(134, 190, 48);
+    border-top-color: transparent;
+    animation: spin 1s linear infinite;
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
