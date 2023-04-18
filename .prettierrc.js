@@ -1,4 +1,4 @@
-const packages = ['@angular/core(.*)', '@angular/(.*)', 'ngrx(.*)', 'immer(.*)', 'rxjs(.*)', 'zod$'];
+const packages = ['@angular/core(.*)', '@angular/(.*)', 'ngrx(.*)', 'immer(.*)', 'rxjs(.*)', 'zod$', 'query-string$'];
 
 /** @type{import('prettier').Config} */
 module.exports = {

@@ -1,4 +1,4 @@
-import { Component, type OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 import { StoreEndpoints } from 'src/app/shared/store/endpoints';
 
@@ -7,7 +7,6 @@ import { StoreEndpoints } from 'src/app/shared/store/endpoints';
   templateUrl: './globalFeed.component.html',
   styleUrls: ['./globalFeed.component.scss'],
 })
-export class GlobalFeedComponent implements OnInit {
+export class GlobalFeedComponent {
   StoreEndpoints = StoreEndpoints;
-  ngOnInit() {}
 }
