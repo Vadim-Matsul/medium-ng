@@ -28,6 +28,7 @@ module.exports = {
     '(.*).action(s?)$',
     '(.*).effect(s?)$',
     '(.*).model(.*)',
+    `(.*).directive(.*)`,
     '<THIRD_PARTY_MODULES>',
   ]),
 };

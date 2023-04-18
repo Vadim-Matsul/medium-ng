@@ -1,7 +1,9 @@
 <ma-loader *ngIf="isLoading$ | async; else feedContent"></ma-loader>
 
 <ng-template #feedContent>
-  <ng-container *ngIf="!!(feed$ | async); else emptyFeed">
+  <ng-container
+    *ngIf="!!(feed$ | async) && (feed$ | async).articles.length; else emptyFeed"
+  >
     <article
       *ngFor="let article of (feed$ | async).articles"
       class="article-preview"
@@ -37,6 +39,10 @@
   </ng-container>
 
   <ng-template #emptyFeed>
+    <div>
+      <!-- TODO: add text for emptyFeed -->
+      emptyFeed
+    </div>
     <ma-error-message
       *ngIf="error$ | async"
       [errorMessage]="'Posts are empty. Something went wrong...'"

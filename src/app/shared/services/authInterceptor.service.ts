@@ -16,10 +16,9 @@ export class AuthInterceptor implements HttpInterceptor {
     const token = this.persistentService.get(StorageKeys.Token);
 
     request = request.clone({
-      headers: request.headers.set(
-        'Authorization',
-        token ? `Bearer ${token}` : ''
-      ),
+      headers: token
+        ? request.headers.set('Authorization', `Bearer ${token}`)
+        : request.headers,
     });
 
     return next.handle(request);

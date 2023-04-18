@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { LocationStrategy } from '@angular/common';
+import { Router } from '@angular/router';
+import queryString from 'query-string';
 
 import { UtilsService } from 'src/app/shared/services/utils.service';
 import { environment } from 'src/environments/environment';
@@ -10,7 +11,7 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./pagination.component.scss'],
 })
 export class PaginationComponent implements OnInit {
-  baseUrl = this.location.getBaseHref();
+  baseUrl = queryString.parseUrl(this.router.url).url;
   readonly #interval = 5;
   pages: number[];
   #pagesCount: number;
@@ -19,10 +20,7 @@ export class PaginationComponent implements OnInit {
   @Input('currentPage') currentPageProps: number;
   @Input('limit') limitProps = environment.limit;
 
-  constructor(
-    private location: LocationStrategy,
-    private utilsService: UtilsService
-  ) {}
+  constructor(private utilsService: UtilsService, private router: Router) {}
 
   ngOnInit() {
     this.initializeValues();

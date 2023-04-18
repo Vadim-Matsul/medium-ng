@@ -3,10 +3,10 @@ import { Component } from '@angular/core';
 import { StoreEndpoints } from 'src/app/shared/store/endpoints';
 
 @Component({
-  selector: 'ma-global-feed',
-  templateUrl: './globalFeed.component.html',
-  styleUrls: ['./globalFeed.component.scss'],
+  selector: 'ma-your-feed',
+  templateUrl: './yourFeed.component.html',
+  styleUrls: ['./yourFeed.component.scss'],
 })
-export class GlobalFeedComponent {
+export class YourFeedComponent {
   StoreEndpoints = StoreEndpoints;
 }

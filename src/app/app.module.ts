@@ -10,6 +10,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AuthModule } from './auth/auth.module';
 import { GlobalFeedModule } from './globalFeed/globalFeed.module';
 import { TopBarModule } from './shared/modules/topBar/topBar.module';
+import { YourFeedModule } from './yourFeed/yourFeed.module';
 import { AppComponent } from './app.component';
 import { AuthInterceptor } from './shared/services/authInterceptor.service';
 import { PersistentService } from './shared/services/persistent.service';
@@ -35,6 +36,7 @@ import { environment } from 'src/environments/environment';
     AuthModule,
     TopBarModule,
     GlobalFeedModule,
+    YourFeedModule,
   ],
   exports: [],
   providers: [

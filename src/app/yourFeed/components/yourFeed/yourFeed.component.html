@@ -1,0 +1,16 @@
+<div class="home-page">
+  <ma-banner></ma-banner>
+
+  <div class="container page">
+    <div class="row">
+      <div class="col-md-9">
+        <ma-feed-toggler></ma-feed-toggler>
+        <ma-feed [apiUrl]="StoreEndpoints.YOUR_FEEDS"></ma-feed>
+      </div>
+
+      <div class="col-md-3">
+        <ma-popular-tags></ma-popular-tags>
+      </div>
+    </div>
+  </div>
+</div>
