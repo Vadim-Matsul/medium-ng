@@ -8,4 +8,5 @@ export enum HttpLinks {
   Settings = 'settings',
   Profiles = 'profiles',
   Tags = 'tags',
+  Your_Feed = 'feed',
 }
