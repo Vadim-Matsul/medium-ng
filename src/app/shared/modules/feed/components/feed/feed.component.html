@@ -27,10 +27,7 @@
       >
         <h1>{{ article.title }}</h1>
         <p>{{ article.description }}</p>
-        <div class="pull-xs-right">
-          <!-- TODO: implement -->
-          HERE IS LIST OF TAGS
-        </div>
+        <ma-tag-list [tags]="article.tagList"></ma-tag-list>
       </a>
     </article>
     <ma-pagination
