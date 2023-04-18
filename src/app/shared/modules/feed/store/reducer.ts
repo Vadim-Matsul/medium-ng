@@ -1,3 +1,4 @@
+import { routerNavigationAction } from '@ngrx/router-store';
 import { createReducer, on, type Action } from '@ngrx/store';
 import produce from 'immer';
 
@@ -25,18 +26,18 @@ const feedReducer = createReducer<FeedStateModel>(
   on(getFeedSuccessAction, (state, { feed }) =>
     produce(state, (draft) => {
       draft.isLoading = false;
-      draft.error = null;
       draft.data = feed;
     })
   ),
   on(getFeedFailureAction, (state) =>
     produce(state, (draft) => {
       draft.isLoading = false;
-      draft.data = null;
       // TODO: implement error saving logic
       draft.error = 'some error';
     })
-  )
+  ),
+  /** @ngrx/router-store */
+  on(routerNavigationAction, () => initialState)
 );
 
 export function reducers(state: FeedStateModel, action: Action) {

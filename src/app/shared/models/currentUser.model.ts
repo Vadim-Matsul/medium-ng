@@ -4,10 +4,7 @@ import { RegExpKeys, RegExpMap } from '../common/regExp';
 
 export const currentUserModelSchema = z.object({
   token: z.string(),
-  username: z
-    .string()
-    .min(5, 'Min username length 5 characters')
-    .max(15, 'Max username length 15 characters'),
+  username: z.string().min(5, 'Min username length 5 characters'),
   bio: z.string().nullable(),
   email: z.string().email('Invalid email'),
   image: z
