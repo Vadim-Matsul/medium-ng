@@ -1,0 +1,25 @@
+<ma-loader *ngIf="isLoading$ | async; else popularTagsContent"></ma-loader>
+
+<ng-template #popularTagsContent>
+  <ng-container *ngIf="!!(tags$ | async); else popularTagsEmpty">
+    <section class="sidebar">
+      <p><strong> Popular Tags</strong></p>
+      <div class="tag-list">
+        <a
+          *ngFor="let tag of tags$ | async"
+          [routerLink]="['/', HttpLinks.Tags, tag]"
+          class="tag-default tag-pill"
+        >
+          {{ tag }}
+        </a>
+      </div>
+    </section>
+  </ng-container>
+
+  <ng-template #popularTagsEmpty>
+    <ma-error-message
+      *ngIf="error$ | async"
+      [errorMessage]="error$ | async"
+    ></ma-error-message>
+  </ng-template>
+</ng-template>

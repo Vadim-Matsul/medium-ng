@@ -7,4 +7,5 @@ export enum HttpLinks {
   NewPost = 'new',
   Settings = 'settings',
   Profiles = 'profiles',
+  Tags = 'tags',
 }

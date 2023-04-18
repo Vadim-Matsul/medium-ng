@@ -1,5 +1,6 @@
 <div class="home-page">
   <ma-banner></ma-banner>
+
   <div class="container page">
     <div class="row">
       <div class="col-md-9">
@@ -7,9 +8,9 @@
         FEED TOGGLER
         <ma-feed [apiUrl]="StoreEndpoints.ALL_FEEDS"></ma-feed>
       </div>
+
       <div class="col-md-3">
-        <!-- TODO: implement -->
-        POPULAR TAGS IS HERE
+        <ma-popular-tags></ma-popular-tags>
       </div>
     </div>
   </div>
