@@ -29,8 +29,8 @@
       >
         <h1>{{ article.title }}</h1>
         <p>{{ article.description }}</p>
-        <ma-tag-list [tags]="article.tagList"></ma-tag-list>
       </a>
+      <ma-tag-list [tags]="article.tagList" class="pull-xs-right"></ma-tag-list>
     </article>
     <ma-pagination
       [total]="(feed$ | async).articlesCount"
