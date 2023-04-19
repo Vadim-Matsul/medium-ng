@@ -1,1 +1,72 @@
-<span> article </span>
+<div *ngIf="isLoading$ | async; else articleData" class="loader-container">
+  <ma-loader></ma-loader>
+</div>
+
+<ng-template #articleData>
+  <ng-container *ngIf="!!article && !(error$ | async); else emptyData">
+    <section class="article-page">
+      <ng-container>
+        <div class="banner">
+          <div class="container">
+            <h1>{{ article.title }}</h1>
+            <div class="article-meta">
+              <a
+                [routerLink]="[
+                  '/',
+                  HttpLinks.Profiles,
+                  article.author.username
+                ]"
+              >
+                <img [src]="article.author.image" />
+              </a>
+              <div class="info">
+                <a
+                  [routerLink]="[
+                    '/',
+                    HttpLinks.Profiles,
+                    article.author.username
+                  ]"
+                  class="author"
+                >
+                  {{ article.author.username }}
+                </a>
+                <span class="date">
+                  {{ article.createdAt | date }}
+                </span>
+              </div>
+              <!-- TODO: add follow & favorite buttons  -->
+              <span *ngIf="isAuthor">
+                <a
+                  [routerLink]="[
+                    '/',
+                    HttpLinks.Posts,
+                    article.slug,
+                    HttpLinks.Edit
+                  ]"
+                  class="btn btn-outline-secondary btn-sm"
+                >
+                  <i class="ion-edit"></i>
+                  Edit Post
+                </a>
+                <!-- TODO: add delete button  -->
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="container">
+          <div class="row article-content">
+            <div class="col-xs-12">
+              <p>{{ article.body }}</p>
+              <ma-tag-list [tags]="article.tagList"></ma-tag-list>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </section>
+  </ng-container>
+
+  <ng-template #emptyData>
+    <ma-error-sphere></ma-error-sphere>
+  </ng-template>
+</ng-template>

@@ -1,23 +1,75 @@
-import { Component, type OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
+import { Component, type OnDestroy, type OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Store, select } from '@ngrx/store';
+import { combineLatest, map, type Observable, type Subscription } from 'rxjs';
 
+import { ARTICLE_SLUG } from '../../article-routing.module';
 import { getArticleAction } from '../../store/actions/getArticle.actions';
+import { type ArticleStateModel } from '../../models/articleState.model';
+import {
+  articleSelector,
+  errorMessageSelector,
+  isLoadingSelector,
+} from '../../store/selectors';
+import { currentUserSelector } from 'src/app/auth/store/selectors';
+import { HttpLinks } from 'src/app/shared/common/httpLinks';
 
 @Component({
   selector: 'ma-article',
   templateUrl: './article.component.html',
   styleUrls: ['./article.component.scss'],
 })
-export class ArticleComponent implements OnInit {
-  constructor(private store: Store) {}
+export class ArticleComponent implements OnInit, OnDestroy {
+  isAuthor = false;
+  article: ArticleStateModel['data'];
+  HttpLinks = HttpLinks;
+  #slug: string | null = null;
+  #subscription: Subscription;
+
+  isLoading$: Observable<ArticleStateModel['isLoading']>;
+  error$: Observable<ArticleStateModel['error']>;
+
+  constructor(private store: Store, private route: ActivatedRoute) {}
 
   ngOnInit() {
     this.initializeValues();
+    this.initializeListeners();
+    this.fetchData();
   }
 
-  private initializeValues() {
-    const mock_slug =
-      'If-we-quantify-the-alarm-we-can-get-to-the-FTP-pixel-through-the-online-SSL-interface!-120863';
-    this.store.dispatch(getArticleAction({ slug: mock_slug }));
+  private async initializeValues() {
+    this.#slug = this.route.snapshot.paramMap.get(ARTICLE_SLUG);
+    this.isLoading$ = this.store.pipe(select(isLoadingSelector));
+    this.error$ = this.store.pipe(select(errorMessageSelector));
+  }
+
+  private async initializeListeners() {
+    const article$ = this.store.pipe(select(articleSelector));
+    const currentUser$ = this.store.pipe(select(currentUserSelector));
+
+    this.#subscription = combineLatest([article$, currentUser$])
+      .pipe(
+        map(([article, currentUser]) => {
+          this.article = article;
+
+          if (!article || !currentUser) return;
+
+          this.isAuthor =
+            currentUser.username === article.author.username &&
+            currentUser.bio === article.author.bio &&
+            currentUser.image === article.author.image;
+        })
+      )
+      .subscribe();
+  }
+
+  private fetchData() {
+    if (this.#slug) {
+      this.store.dispatch(getArticleAction({ slug: this.#slug }));
+    }
+  }
+
+  ngOnDestroy() {
+    this.#subscription.unsubscribe();
   }
 }

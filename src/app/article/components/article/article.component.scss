@@ -1,0 +1,5 @@
+@import 'src/variables.scss';
+
+.loader-container {
+  height: calc(100vh - $header_height);
+}

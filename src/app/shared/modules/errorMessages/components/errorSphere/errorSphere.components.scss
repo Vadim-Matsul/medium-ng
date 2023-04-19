@@ -1,6 +1,42 @@
+$contrast: 0.1;
+$size: 5px;
+
 .sphere {
-  background: rgba(163, 14, 14, 0.158);
   border-radius: 50%;
   font-weight: 600;
   width: min-content;
+
+  background: rgba(163, 14, 14, 0.158);
+  box-shadow: 0 0 $size rgba(0, 0, 0, $contrast),
+    0 0 calc($size * 2) rgba(0, 0, 0, ($contrast * 2)),
+    0 0 calc($size * 3) rgba(0, 0, 0, ($contrast * 3));
+  animation: shadow 1.5s infinite linear;
+}
+
+@keyframes shadow {
+  0% {
+    box-shadow: 0 0 $size rgba(0, 0, 0, $contrast),
+      0 0 calc($size * 2) rgba(0, 0, 0, ($contrast * 2)),
+      0 0 calc($size * 3) rgba(0, 0, 0, ($contrast * 3));
+  }
+  25% {
+    box-shadow: 0 0 $size rgba(0, 0, 0, ($contrast / 2)),
+      0 0 calc($size * 3) rgba(0, 0, 0, ($contrast * 2.5)),
+      0 0 calc($size * 5) rgba(0, 0, 0, ($contrast * 1.5));
+  }
+  50% {
+    box-shadow: 0 0 $size rgba(0, 0, 0, $contrast),
+      0 0 calc($size * 2) rgba(0, 0, 0, ($contrast * 2)),
+      0 0 calc($size * 3) rgba(0, 0, 0, ($contrast * 3.5));
+  }
+  75% {
+    box-shadow: 0 0 $size rgba(0, 0, 0, ($contrast / 2)),
+      0 0 calc($size * 3) rgba(0, 0, 0, ($contrast * 2.5)),
+      0 0 calc($size * 5) rgba(0, 0, 0, ($contrast * 1.5));
+  }
+  100% {
+    box-shadow: 0 0 $size rgba(0, 0, 0, $contrast),
+      0 0 calc($size * 2) rgba(0, 0, 0, ($contrast * 2)),
+      0 0 calc($size * 3) rgba(0, 0, 0, ($contrast * 3));
+  }
 }
