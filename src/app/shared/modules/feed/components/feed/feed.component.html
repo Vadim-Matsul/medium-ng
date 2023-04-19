@@ -34,15 +34,12 @@
     </article>
     <ma-pagination
       [total]="(feed$ | async).articlesCount"
-      [currentPage]="currentPage$ | async"
+      [currentPage]="currentPage"
     ></ma-pagination>
   </ng-container>
 
   <ng-template #emptyFeed>
-    <div>
-      <!-- TODO: add text for emptyFeed -->
-      emptyFeed
-    </div>
+    <ma-error-sphere></ma-error-sphere>
     <ma-error-message
       *ngIf="error$ | async"
       [errorMessage]="'Posts are empty. Something went wrong...'"

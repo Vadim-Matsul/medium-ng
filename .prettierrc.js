@@ -1,4 +1,4 @@
-const packages = ['@angular/core(.*)', '@angular/(.*)', 'ngrx(.*)', 'immer(.*)', 'rxjs(.*)', 'zod$', 'query-string$'];
+const packages = ['@angular/core(.*)', '@angular/(.*)', 'ngrx(.*)', 'immer(.*)', 'rxjs(.*)', 'zod$', 'query-string$', 'TagCloud$'];
 
 /** @type{import('prettier').Config} */
 module.exports = {
@@ -22,13 +22,13 @@ module.exports = {
   importOrderSortSpecifiers: true,
   importOrderParserPlugins: ["typescript", "decorators-legacy"],
   importOrder: packages.concat('', [
-    '(.*).module(.*)',
-    '(.*).component(.*)',
-    '(.*).service(.*)',
+    '(.*).module$',
+    '(.*).component$',
+    '(.*).service$',
     '(.*).action(s?)$',
     '(.*).effect(s?)$',
-    '(.*).model(.*)',
-    `(.*).directive(.*)`,
+    '(.*).model$',
+    `(.*).directive$`,
     '<THIRD_PARTY_MODULES>',
   ]),
 };

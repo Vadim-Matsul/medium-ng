@@ -21,8 +21,10 @@
         [routerLink]="['/', HttpLinks.Tags, tagNameProps]"
         routerLinkActive="active"
         class="nav-link"
-        >#&nbsp;{{ tagNameProps }}</a
       >
+        <i class="ion-pound"></i>
+        {{ tagNameProps }}
+      </a>
     </li>
   </ul>
 </nav>

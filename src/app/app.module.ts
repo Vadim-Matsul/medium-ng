@@ -10,6 +10,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AuthModule } from './auth/auth.module';
 import { GlobalFeedModule } from './globalFeed/globalFeed.module';
 import { TopBarModule } from './shared/modules/topBar/topBar.module';
+import { TagFeedModule } from './tagFeed/tagFeed.module';
 import { YourFeedModule } from './yourFeed/yourFeed.module';
 import { AppComponent } from './app.component';
 import { AuthInterceptor } from './shared/services/authInterceptor.service';
@@ -37,8 +38,8 @@ import { environment } from 'src/environments/environment';
     TopBarModule,
     GlobalFeedModule,
     YourFeedModule,
+    TagFeedModule,
   ],
-  exports: [],
   providers: [
     PersistentService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
