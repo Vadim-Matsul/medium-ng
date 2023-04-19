@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-import { feedModelSchema } from '../../../models/feed.model';
+import { feedModelSchema } from '../../../models/posts/feed.model';
 
 export const feedResponseModelSchema = z.object({
   articles: z.array(feedModelSchema),
