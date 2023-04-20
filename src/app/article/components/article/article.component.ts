@@ -4,6 +4,7 @@ import { Store, select } from '@ngrx/store';
 import { combineLatest, map, type Observable, type Subscription } from 'rxjs';
 
 import { ARTICLE_SLUG } from '../../article-routing.module';
+import { deleteArticleAction } from '../../store/actions/deleteArticle.actions';
 import { getArticleAction } from '../../store/actions/getArticle.actions';
 import { type ArticleStateModel } from '../../models/articleState.model';
 import {
@@ -66,6 +67,12 @@ export class ArticleComponent implements OnInit, OnDestroy {
   private fetchData() {
     if (this.#slug) {
       this.store.dispatch(getArticleAction({ slug: this.#slug }));
+    }
+  }
+
+  deleteArticle() {
+    if (this.#slug) {
+      this.store.dispatch(deleteArticleAction({ slug: this.#slug }));
     }
   }
 

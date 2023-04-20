@@ -43,12 +43,19 @@
                     article.slug,
                     HttpLinks.Edit
                   ]"
-                  class="btn btn-outline-secondary btn-sm"
+                  class="btn btn-outline-secondary btn-sm m-r-1"
                 >
                   <i class="ion-edit"></i>
                   Edit Post
                 </a>
-                <!-- TODO: add delete button  -->
+
+                <button
+                  (click)="deleteArticle()"
+                  class="btn btn-sm btn-outline-danger"
+                >
+                  <i class="ion-trash-a"></i>
+                  Delete Post
+                </button>
               </span>
             </div>
           </div>
