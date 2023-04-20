@@ -9,6 +9,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { AppRoutingModule } from './app-routing.module';
 import { ArticleModule } from './article/article.module';
 import { AuthModule } from './auth/auth.module';
+import { CreateArticleModule } from './createArticle/createArticle.module';
 import { GlobalFeedModule } from './globalFeed/globalFeed.module';
 import { TopBarModule } from './shared/modules/topBar/topBar.module';
 import { TagFeedModule } from './tagFeed/tagFeed.module';
@@ -40,6 +41,7 @@ import { environment } from 'src/environments/environment';
     GlobalFeedModule,
     YourFeedModule,
     TagFeedModule,
+    CreateArticleModule /** CreateArticleModule must be registered before ArticleModule */,
     ArticleModule,
   ],
   providers: [

@@ -15,3 +15,12 @@ export const feedModelSchema = z.object({
   favoritesCount: z.number(),
 });
 export type FeedModel = z.infer<typeof feedModelSchema>;
+
+export const articleFormModelSchema = feedModelSchema.pick({
+  title: true,
+  description: true,
+  body: true,
+  tagList: true,
+});
+
+export type ArticleFormModel = z.infer<typeof articleFormModelSchema>;

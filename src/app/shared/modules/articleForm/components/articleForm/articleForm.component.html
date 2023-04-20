@@ -1,0 +1,56 @@
+<section class="editor-page">
+  <div class="container page">
+    <div class="row">
+      <div class="col-md-10 offset-md-1 col-xs-12">
+        <ma-error-messages
+          *ngIf="!!errorsMapProps"
+          [errorMessages]="errorsMapProps"
+        ></ma-error-messages>
+
+        <form [formGroup]="form" (ngSubmit)="onFormSubmit()">
+          <fieldset>
+            <fieldset class="form-group">
+              <input
+                type="text"
+                formControlName="title"
+                placeholder="Title"
+                class="form-control form-control-lg"
+              />
+            </fieldset>
+            <fieldset class="form-group">
+              <input
+                type="text"
+                formControlName="description"
+                placeholder="What is the post about?"
+                class="form-control form-control-lg"
+              />
+            </fieldset>
+            <fieldset class="form-group">
+              <textarea
+                formControlName="body"
+                placeholder="Write your post"
+                rows="6"
+                class="form-control form-control-lg"
+              ></textarea>
+            </fieldset>
+            <fieldset class="form-group">
+              <input
+                type="text"
+                formControlName="tagList"
+                placeholder="Enter Tags"
+                class="form-control form-control-lg"
+              />
+            </fieldset>
+            <button
+              type="submit"
+              [disabled]="!!errorsMapProps || isSubmittingProps"
+              class="btn btn-lg pull-xs-right btn-primary"
+            >
+              Publish Post
+            </button>
+          </fieldset>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>

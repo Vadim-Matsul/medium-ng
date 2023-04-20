@@ -1,9 +1,9 @@
 import { z } from 'zod';
 
-import { feedStateModelSchema } from '../modules/feed/models/feedState.model';
-import { popularTagsStateModelSchema } from '../modules/popularTags/models/popularTagsState.model';
+import { feedStateModelSchema } from '../../modules/feed/models/feedState.model';
+import { popularTagsStateModelSchema } from '../../modules/popularTags/models/popularTagsState.model';
 import { authStateModelSchema } from 'src/app/auth/models/authState.model';
-import { StoreSlices } from '../store/slices';
+import { StoreSlices } from '../../store/slices';
 
 export const rootStateModelSchema = z.object({
   [StoreSlices.AUTH]: authStateModelSchema,
