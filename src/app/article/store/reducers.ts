@@ -40,10 +40,7 @@ const articleReducer = createReducer<ArticleStateModel>(
   on(routerNavigatedAction, () => initialState)
 );
 
-export const articleFeature = createFeature<
-  StoreSlices.ARTICLE,
-  ArticleStateModel
->({
+export const articleFeature = createFeature<StoreSlices.ARTICLE, ArticleStateModel>({
   name: StoreSlices.ARTICLE,
   reducer: articleReducer,
 });

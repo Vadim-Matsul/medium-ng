@@ -2,10 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs';
 
-import {
-  feedResponseModelSchema,
-  type FeedResponseModel,
-} from '../models/feedHttp.model';
+import { feedResponseModelSchema, type FeedResponseModel } from '../models/feedHttp.model';
 import { environment } from 'src/environments/environment';
 
 @Injectable()

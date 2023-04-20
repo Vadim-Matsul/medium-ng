@@ -10,6 +10,4 @@ export const fetchUserSuccessAction = createAction(
   props<{ currentUser: CurrentUserModel }>()
 );
 
-export const fetchUserFailureAction = createAction(
-  ActionTypes.FETCH_USER_BY_TOKEN_FAILURE
-);
+export const fetchUserFailureAction = createAction(ActionTypes.FETCH_USER_BY_TOKEN_FAILURE);

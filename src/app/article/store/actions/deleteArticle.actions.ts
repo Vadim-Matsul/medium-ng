@@ -7,9 +7,7 @@ export const deleteArticleAction = createAction(
   props<{ slug: string }>()
 );
 
-export const deleteArticleSuccessAction = createAction(
-  ActionTypes.DELETE_ARTICLE_SUCCESS
-);
+export const deleteArticleSuccessAction = createAction(ActionTypes.DELETE_ARTICLE_SUCCESS);
 
 export const deleteArticleFailureAction = createAction(
   ActionTypes.DELETE_ARTICLE_FAILURE

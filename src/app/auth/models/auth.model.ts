@@ -27,6 +27,4 @@ export type AuthResponseModel = z.infer<typeof authResponseModelSchema>;
 export const authBackendErrorsModelSchema = z.object({
   errors: backendErrorsModelSchema,
 });
-export type AuthBackendErrorsModel = z.infer<
-  typeof authBackendErrorsModelSchema
->;
+export type AuthBackendErrorsModel = z.infer<typeof authBackendErrorsModelSchema>;

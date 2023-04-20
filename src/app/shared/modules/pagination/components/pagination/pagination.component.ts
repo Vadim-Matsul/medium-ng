@@ -50,23 +50,14 @@ export class PaginationComponent implements OnInit {
 
   onSlideLeft() {
     const allowStart = Math.max(this.pages.at(0)! - 2, 0);
-    const allowEnd = Math.max(
-      this.pages.at(this.pages.length - 1)! - 1,
-      this.limitProps
-    );
+    const allowEnd = Math.max(this.pages.at(this.pages.length - 1)! - 1, this.limitProps);
 
     this.calculatePagePagination(allowStart, allowEnd);
   }
 
   onSlideRight() {
-    const allowStart = Math.min(
-      this.pages.at(0)!,
-      this.#pagesCount - this.limitProps
-    );
-    const allowEnd = Math.min(
-      this.pages.at(this.pages.length - 1)! + 1,
-      this.#pagesCount
-    );
+    const allowStart = Math.min(this.pages.at(0)!, this.#pagesCount - this.limitProps);
+    const allowEnd = Math.min(this.pages.at(this.pages.length - 1)! + 1, this.#pagesCount);
 
     this.calculatePagePagination(allowStart, allowEnd);
   }

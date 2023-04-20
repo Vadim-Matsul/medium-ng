@@ -13,11 +13,7 @@ import queryString from 'query-string';
 
 import { getFeedAction } from '../../store/actions/getFeed.actions';
 import { type FeedStateModel } from '../../models/feedState.model';
-import {
-  errorSelector,
-  feedSelector,
-  isLoadingSelector,
-} from '../../store/selectors';
+import { errorSelector, feedSelector, isLoadingSelector } from '../../store/selectors';
 import { HttpLinks } from 'src/app/shared/common/httpLinks';
 import { StoreEndpoints } from 'src/app/shared/store/endpoints';
 import { environment } from 'src/environments/environment';
@@ -51,8 +47,7 @@ export class FeedComponent implements OnInit, OnDestroy, OnChanges {
     /** fetch feed by slug */
     const api_changes = changes['apiUrlProps'];
     const isApiUrlChanged =
-      !api_changes.firstChange &&
-      api_changes.currentValue !== api_changes.previousValue;
+      !api_changes.firstChange && api_changes.currentValue !== api_changes.previousValue;
 
     if (!isApiUrlChanged) return;
 

@@ -15,9 +15,7 @@ const selector = 'routerLinkActiveWithoutQuery';
 @Directive({
   selector: `[${selector}]`,
 })
-export class RouterLinkActiveWithoutQueryDirective
-  implements OnInit, OnDestroy, DoCheck
-{
+export class RouterLinkActiveWithoutQueryDirective implements OnInit, OnDestroy, DoCheck {
   @Input(selector) linkPathProps: string;
 
   #subscription: Subscription;

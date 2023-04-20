@@ -8,6 +8,7 @@ import { ErrorMessagesModule } from '../shared/modules/errorMessages/errorMessag
 import { AuthRoutingModule } from './auth-routing.module';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
+import { ControlFormService } from '../shared/services/controlForm.service';
 import { PersistentService } from '../shared/services/persistent.service';
 import { ZodService } from '../shared/services/zod.service';
 import { AuthService } from './services/auth.service';
@@ -29,6 +30,6 @@ import { reducers } from './store/reducers';
     ErrorMessagesModule,
   ],
   declarations: [RegisterComponent, LoginComponent],
-  providers: [AuthService, ZodService, PersistentService],
+  providers: [AuthService, ZodService, PersistentService, ControlFormService],
 })
 export class AuthModule {}

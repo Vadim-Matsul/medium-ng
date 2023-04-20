@@ -20,8 +20,6 @@ export class TagListComponent implements OnInit {
   constructor(private router: ActivatedRoute) {}
 
   ngOnInit() {
-    this.currentRouteTag$ = this.router.params.pipe(
-      map((params) => <string>params[TAG_SLUG])
-    );
+    this.currentRouteTag$ = this.router.params.pipe(map((params) => <string>params[TAG_SLUG]));
   }
 }

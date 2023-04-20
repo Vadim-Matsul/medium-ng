@@ -27,8 +27,5 @@ export class GetPopularTagsEffect {
     );
   });
 
-  constructor(
-    private actions$: Actions,
-    private popularTagsService: PopularTagsService
-  ) {}
+  constructor(private actions$: Actions, private popularTagsService: PopularTagsService) {}
 }

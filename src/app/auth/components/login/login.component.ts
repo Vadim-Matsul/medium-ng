@@ -1,23 +1,15 @@
 import { Component, type OnInit } from '@angular/core';
 import { FormBuilder, Validators, type FormGroup } from '@angular/forms';
 import { Store, select } from '@ngrx/store';
-import {
-  combineLatest,
-  debounceTime,
-  map,
-  shareReplay,
-  type Observable,
-} from 'rxjs';
+import { combineLatest, debounceTime, map, shareReplay, type Observable } from 'rxjs';
 
+import { ControlFormService } from 'src/app/shared/services/controlForm.service';
 import { ZodService } from 'src/app/shared/services/zod.service';
 import { loginAction } from '../../store/actions/login.actions';
 import { loginFormModelSchema } from '../../models/login/login.model';
 import { loginRequestModelSchema } from '../../models/login/loginHttp.model';
 import { type BackendErrorsModel } from 'src/app/shared/models/backendErrors.model';
-import {
-  errorMessagesSelector,
-  isSubmittingSelector,
-} from '../../store/selectors';
+import { errorMessagesSelector, isSubmittingSelector } from '../../store/selectors';
 import { HttpLinks } from 'src/app/shared/common/httpLinks';
 
 @Component({
@@ -34,7 +26,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private store: Store,
-    private zodService: ZodService
+    private zodService: ZodService,
+    private controlFormService: ControlFormService
   ) {}
 
   ngOnInit() {
@@ -60,22 +53,13 @@ export class LoginComponent implements OnInit {
 
     const userFormErrors$ = this.form.valueChanges.pipe(
       debounceTime(300),
-      map((formValues: Record<string, string>) =>
-        Object.fromEntries(
-          Object.entries(formValues).filter(([_, value]) => Boolean(value))
-        )
-      ),
+      this.controlFormService.getActiveFormErrors,
       map((activeFormFields) =>
-        this.zodService.getErrorsMap(
-          loginFormModelSchema.safeParse(activeFormFields)
-        )
+        this.zodService.getErrorsMap(loginFormModelSchema.safeParse(activeFormFields))
       )
     );
 
-    this.errorMessages$ = combineLatest([
-      backendFormErrors$,
-      userFormErrors$,
-    ]).pipe(
+    this.errorMessages$ = combineLatest([backendFormErrors$, userFormErrors$]).pipe(
       map(([backendErrors, userErrors]) => {
         const draft = {
           ...(backendErrors ?? {}),

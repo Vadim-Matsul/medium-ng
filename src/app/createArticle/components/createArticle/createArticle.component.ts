@@ -1,19 +1,40 @@
-import { Component } from '@angular/core';
+import { Component, type OnInit } from '@angular/core';
+import { Store, select } from '@ngrx/store';
+import { type Observable } from 'rxjs';
 
-import { type ArticleUserFormModel } from 'src/app/shared/modules/articleForm/models/articleUserForm.model';
+import { createArticleAction } from '../../store/actions/createArticle.actions';
+import { type CreateArticleStateModel } from '../../models/createArticleState.model';
+import { ArticleFormModel } from 'src/app/shared/models/posts/feed.model';
+import { errorMessagesSelector, isSubmittingSelector } from '../../store/selectors';
 
 @Component({
   selector: 'ma-create-article',
   templateUrl: './createArticle.component.html',
   styleUrls: ['./createArticle.component.scss'],
 })
-export class CreateArticleComponent {
-  initFormValues = {
-    title: 't',
-    description: 'tt',
-    body: 'tttt',
-    tagList: ['1 ', '2 '],
+export class CreateArticleComponent implements OnInit {
+  initialFormValues = {
+    title: '',
+    description: '',
+    body: '',
+    tagList: [],
   };
 
-  onFormSubmit(event: ArticleUserFormModel) {}
+  isSubmitting$: Observable<CreateArticleStateModel['isSubmitting']>;
+  errorMessagesMap$: Observable<CreateArticleStateModel['validationErrors']>;
+
+  constructor(private store: Store) {}
+
+  ngOnInit() {
+    this.initializeValues();
+  }
+
+  private initializeValues() {
+    this.isSubmitting$ = this.store.pipe(select(isSubmittingSelector));
+    this.errorMessagesMap$ = this.store.pipe(select(errorMessagesSelector));
+  }
+
+  onFormSubmit(event: ArticleFormModel) {
+    this.store.dispatch(createArticleAction({ articleFormData: event }));
+  }
 }

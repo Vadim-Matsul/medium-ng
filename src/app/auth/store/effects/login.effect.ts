@@ -6,11 +6,7 @@ import { catchError, exhaustMap, map, of, tap } from 'rxjs';
 
 import { PersistentService } from './../../../shared/services/persistent.service';
 import { AuthService } from './../../services/auth.service';
-import {
-  loginAction,
-  loginFailureAction,
-  loginSuccessAction,
-} from '../actions/login.actions';
+import { loginAction, loginFailureAction, loginSuccessAction } from '../actions/login.actions';
 import { authBackendErrorsModelSchema } from '../../models/auth.model';
 import { HttpLinks } from 'src/app/shared/common/httpLinks';
 import { StorageKeys } from 'src/app/shared/common/storage';
@@ -23,10 +19,7 @@ export class LoginEffect {
       exhaustMap(({ request }) => {
         return this.authService.login(request).pipe(
           map((currentUser) => {
-            this.persistentService.set<string>(
-              StorageKeys.Token,
-              currentUser.token
-            );
+            this.persistentService.set<string>(StorageKeys.Token, currentUser.token);
 
             return loginSuccessAction({ currentUser });
           }),

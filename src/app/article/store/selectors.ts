@@ -3,9 +3,7 @@ import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { type ArticleStateModel } from '../models/articleState.model';
 import { articleFeature } from './reducers';
 
-const selectArticleFeature = createFeatureSelector<ArticleStateModel>(
-  articleFeature.name
-);
+const selectArticleFeature = createFeatureSelector<ArticleStateModel>(articleFeature.name);
 
 export const isLoadingSelector = createSelector(
   selectArticleFeature,

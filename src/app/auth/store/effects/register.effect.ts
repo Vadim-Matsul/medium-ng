@@ -24,10 +24,7 @@ export class RegisterEffect {
       exhaustMap(({ request }) => {
         return this.authService.register(request).pipe(
           map((currentUser) => {
-            this.persistentService.set<string>(
-              StorageKeys.Token,
-              currentUser.token
-            );
+            this.persistentService.set<string>(StorageKeys.Token, currentUser.token);
 
             return registerSuccessAction({ currentUser });
           }),

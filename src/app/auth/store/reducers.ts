@@ -6,11 +6,7 @@ import {
   fetchUserFailureAction,
   fetchUserSuccessAction,
 } from './actions/fetchUser.actions';
-import {
-  loginAction,
-  loginFailureAction,
-  loginSuccessAction,
-} from './actions/login.actions';
+import { loginAction, loginFailureAction, loginSuccessAction } from './actions/login.actions';
 import {
   registerAction,
   registerFailureAction,

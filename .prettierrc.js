@@ -3,7 +3,7 @@ const packages = ['@angular/core(.*)', '@angular/(.*)', 'ngrx(.*)', 'immer(.*)',
 /** @type{import('prettier').Config} */
 module.exports = {
   plugins: [require('@ianvs/prettier-plugin-sort-imports')],
-  printWidth: 80,
+  printWidth: 100,
   tabWidth: 2,
   useTabs: false,
   semi: true,

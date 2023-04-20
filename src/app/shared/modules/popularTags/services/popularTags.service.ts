@@ -21,8 +21,6 @@ export class PopularTagsService {
 
     return this.http
       .get<PopularTagsResponseModel>(api)
-      .pipe(
-        map((response) => popularTagsResponseModelSchema.parse(response).tags)
-      );
+      .pipe(map((response) => popularTagsResponseModelSchema.parse(response).tags));
   }
 }

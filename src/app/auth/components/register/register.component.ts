@@ -10,10 +10,7 @@ import { type AuthStateModel } from '../../models/authState.model';
 import { registerFormModelSchema } from '../../models/register/register.model';
 import { registerRequestModelSchema } from '../../models/register/registerHttp.model';
 import { type BackendErrorsModel } from 'src/app/shared/models/backendErrors.model';
-import {
-  errorMessagesSelector,
-  isSubmittingSelector,
-} from '../../store/selectors';
+import { errorMessagesSelector, isSubmittingSelector } from '../../store/selectors';
 import { HttpLinks } from 'src/app/shared/common/httpLinks';
 
 @Component({
@@ -58,21 +55,14 @@ export class RegisterComponent implements OnInit {
     const userFormErrors$ = this.form.valueChanges.pipe(
       debounceTime(300),
       map((formValues: Record<string, string>) =>
-        Object.fromEntries(
-          Object.entries(formValues).filter(([_, value]) => Boolean(value))
-        )
+        Object.fromEntries(Object.entries(formValues).filter(([_, value]) => Boolean(value)))
       ),
       map((activeFormFields) =>
-        this.zodService.getErrorsMap(
-          registerFormModelSchema.safeParse(activeFormFields)
-        )
+        this.zodService.getErrorsMap(registerFormModelSchema.safeParse(activeFormFields))
       )
     );
 
-    this.errorMessages$ = combineLatest([
-      backendFormErrors$,
-      userFormErrors$,
-    ]).pipe(
+    this.errorMessages$ = combineLatest([backendFormErrors$, userFormErrors$]).pipe(
       map(([backendErrors, userErrors]) => {
         const errorsMap = {
           ...(backendErrors ?? {}),

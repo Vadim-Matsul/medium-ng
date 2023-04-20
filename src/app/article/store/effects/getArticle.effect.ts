@@ -27,8 +27,5 @@ export class GetArticleEffect {
     );
   });
 
-  constructor(
-    private actions$: Actions,
-    private sharedArticleService: SharedArticleService
-  ) {}
+  constructor(private actions$: Actions, private sharedArticleService: SharedArticleService) {}
 }

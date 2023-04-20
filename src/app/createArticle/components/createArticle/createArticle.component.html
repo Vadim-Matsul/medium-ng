@@ -1,5 +1,6 @@
 <ma-article-form
-  [initialValues]="initFormValues"
-  [isSubmitting]="false"
+  [initialValues]="initialFormValues"
+  [isSubmitting]="isSubmitting$ | async"
+  [errorsMap]="errorMessagesMap$ | async"
   (articleSubmit)="onFormSubmit($event)"
 ></ma-article-form>

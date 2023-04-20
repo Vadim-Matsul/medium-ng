@@ -6,9 +6,7 @@ import { HttpLinks } from '../shared/common/httpLinks';
 
 export const TAG_SLUG = 'slug';
 
-const routes: Routes = [
-  { path: `${HttpLinks.Tags}/:${TAG_SLUG}`, component: TagFeedComponent },
-];
+const routes: Routes = [{ path: `${HttpLinks.Tags}/:${TAG_SLUG}`, component: TagFeedComponent }];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

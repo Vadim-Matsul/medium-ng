@@ -7,11 +7,7 @@ import { ARTICLE_SLUG } from '../../article-routing.module';
 import { deleteArticleAction } from '../../store/actions/deleteArticle.actions';
 import { getArticleAction } from '../../store/actions/getArticle.actions';
 import { type ArticleStateModel } from '../../models/articleState.model';
-import {
-  articleSelector,
-  errorMessageSelector,
-  isLoadingSelector,
-} from '../../store/selectors';
+import { articleSelector, errorMessageSelector, isLoadingSelector } from '../../store/selectors';
 import { currentUserSelector } from 'src/app/auth/store/selectors';
 import { HttpLinks } from 'src/app/shared/common/httpLinks';
 

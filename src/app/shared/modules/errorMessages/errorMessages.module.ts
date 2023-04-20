@@ -7,15 +7,7 @@ import { ErrorSphereComponent } from './components/errorSphere/errorSphere.compo
 
 @NgModule({
   imports: [CommonModule],
-  declarations: [
-    ErrorMessagesComponent,
-    ErrorMessageComponent,
-    ErrorSphereComponent,
-  ],
-  exports: [
-    ErrorMessagesComponent,
-    ErrorMessageComponent,
-    ErrorSphereComponent,
-  ],
+  declarations: [ErrorMessagesComponent, ErrorMessageComponent, ErrorSphereComponent],
+  exports: [ErrorMessagesComponent, ErrorMessageComponent, ErrorSphereComponent],
 })
 export class ErrorMessagesModule {}

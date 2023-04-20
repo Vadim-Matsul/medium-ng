@@ -5,10 +5,7 @@ import { type BackendErrorsModel } from 'src/app/shared/models/backendErrors.mod
 import { type CurrentUserModel } from 'src/app/shared/models/currentUser.model';
 import { ActionTypes } from '../actionTypes';
 
-export const loginAction = createAction(
-  ActionTypes.LOGIN,
-  props<{ request: LoginRequestModel }>()
-);
+export const loginAction = createAction(ActionTypes.LOGIN, props<{ request: LoginRequestModel }>());
 
 export const loginSuccessAction = createAction(
   ActionTypes.LOGIN_SUCCESS,
