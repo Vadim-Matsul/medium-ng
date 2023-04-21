@@ -12,7 +12,7 @@ import {
   registerFailureAction,
   registerSuccessAction,
 } from '../actions/register.actions';
-import { authBackendErrorsModelSchema } from '../../models/auth.model';
+import { backendErrorsResponseModelSchema } from 'src/app/shared/models/backendErrors.model';
 import { HttpLinks } from 'src/app/shared/common/httpLinks';
 import { StorageKeys } from 'src/app/shared/common/storage';
 
@@ -29,7 +29,7 @@ export class RegisterEffect {
             return registerSuccessAction({ currentUser });
           }),
           catchError((_errors: HttpErrorResponse) => {
-            const errors = authBackendErrorsModelSchema.parse(_errors.error);
+            const errors = backendErrorsResponseModelSchema.parse(_errors.error);
             return of(registerFailureAction(errors));
           })
         );

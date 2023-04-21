@@ -4,4 +4,5 @@ export enum StoreSlices {
   POPULAR_TAGS = 'popular_tags',
   ARTICLE = 'article',
   ARTICLE_FORM = 'article_form',
+  ARTICLE_EDIT = 'article_edit',
 }

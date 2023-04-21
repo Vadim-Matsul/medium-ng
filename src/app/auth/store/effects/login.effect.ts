@@ -7,7 +7,7 @@ import { catchError, exhaustMap, map, of, tap } from 'rxjs';
 import { PersistentService } from './../../../shared/services/persistent.service';
 import { AuthService } from './../../services/auth.service';
 import { loginAction, loginFailureAction, loginSuccessAction } from '../actions/login.actions';
-import { authBackendErrorsModelSchema } from '../../models/auth.model';
+import { backendErrorsResponseModelSchema } from 'src/app/shared/models/backendErrors.model';
 import { HttpLinks } from 'src/app/shared/common/httpLinks';
 import { StorageKeys } from 'src/app/shared/common/storage';
 
@@ -24,7 +24,7 @@ export class LoginEffect {
             return loginSuccessAction({ currentUser });
           }),
           catchError((_error: HttpErrorResponse) => {
-            const errors = authBackendErrorsModelSchema.parse(_error.error);
+            const errors = backendErrorsResponseModelSchema.parse(_error.error);
             return of(loginFailureAction(errors));
           })
         );

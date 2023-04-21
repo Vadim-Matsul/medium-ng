@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs';
 
-import { type AuthResponseModel } from '../models/auth.model';
+import { type AuthResponseModel } from '../models/authHttp.model';
 import { type LoginRequestModel } from '../models/login/loginHttp.model';
 import { type RegisterRequestModel } from '../models/register/registerHttp.model';
 import {

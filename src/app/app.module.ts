@@ -10,6 +10,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { ArticleModule } from './article/article.module';
 import { AuthModule } from './auth/auth.module';
 import { CreateArticleModule } from './createArticle/createArticle.module';
+import { EditArticleModule } from './editArticle/editArticle.module';
 import { GlobalFeedModule } from './globalFeed/globalFeed.module';
 import { TopBarModule } from './shared/modules/topBar/topBar.module';
 import { TagFeedModule } from './tagFeed/tagFeed.module';
@@ -41,8 +42,9 @@ import { environment } from 'src/environments/environment';
     GlobalFeedModule,
     YourFeedModule,
     TagFeedModule,
-    CreateArticleModule /** CreateArticleModule must be registered before ArticleModule */,
-    ArticleModule,
+    CreateArticleModule,
+    EditArticleModule /** CreateArticleModule must be registered before EditArticleModule */,
+    ArticleModule /** CreateArticleModule & EditArticleModule must be registered before ArticleModule */,
   ],
   providers: [
     PersistentService,

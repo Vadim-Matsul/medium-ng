@@ -10,7 +10,7 @@ import {
   createArticleFailureAction,
   createArticleSuccessAction,
 } from '../actions/createArticle.actions';
-import { createArticleErrorsModelSchema } from '../../models/createArticleHttp.model';
+import { backendErrorsResponseModelSchema } from 'src/app/shared/models/backendErrors.model';
 import { feedModelSchema } from 'src/app/shared/models/posts/feed.model';
 import { HttpLinks } from 'src/app/shared/common/httpLinks';
 
@@ -26,7 +26,7 @@ export class CreateArticleEffect {
             return createArticleSuccessAction({ article });
           }),
           catchError((_errors: HttpErrorResponse) => {
-            const { errors } = createArticleErrorsModelSchema.parse(_errors.error);
+            const { errors } = backendErrorsResponseModelSchema.parse(_errors.error);
             return of(createArticleFailureAction({ errors }));
           })
         );
@@ -34,7 +34,7 @@ export class CreateArticleEffect {
     );
   });
 
-  createAfterCreate$ = createEffect(
+  redirectAfterCreate$ = createEffect(
     () => {
       return this.actions$.pipe(
         ofType(createArticleSuccessAction),

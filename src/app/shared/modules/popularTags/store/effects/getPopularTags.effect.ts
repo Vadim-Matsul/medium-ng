@@ -16,7 +16,8 @@ export class GetPopularTagsEffect {
       ofType(getPopularTagsAction),
       exhaustMap(() => {
         return this.popularTagsService.getPopularTags().pipe(
-          map((popularTags) => {
+          map((_popularTags) => {
+            const popularTags = _popularTags.filter(Boolean);
             return getPopularTagsSuccessAction({ popularTags });
           }),
           catchError(() => {

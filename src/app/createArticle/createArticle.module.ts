@@ -4,7 +4,6 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 
 import { ArticleFormModule } from '../shared/modules/articleForm/articleForm.module';
-import { ErrorMessagesModule } from '../shared/modules/errorMessages/errorMessages.module';
 import { CreateArticleRoutingModule } from './createArticle-routing.module';
 import { CreateArticleComponent } from './components/createArticle/createArticle.component';
 import { CreateArticleService } from './services/createArticle.service';
@@ -19,7 +18,6 @@ import { createArticleFeature } from './store/reducers';
     EffectsModule.forFeature([CreateArticleEffect]),
     /** project */
     CreateArticleRoutingModule,
-    ErrorMessagesModule,
     ArticleFormModule,
   ],
   declarations: [CreateArticleComponent],

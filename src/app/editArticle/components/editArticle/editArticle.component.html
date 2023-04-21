@@ -1,0 +1,18 @@
+<div *ngIf="isLoading$ | async; else editContent" class="loader-container">
+  <ma-loader></ma-loader>
+</div>
+
+<ng-template #editContent>
+  <ng-container *ngIf="!!(initialArticleValues$ | async); else editEmptyContent">
+    <ma-article-form
+      [initialValues]="initialArticleValues$ | async"
+      [isSubmitting]="isSubmitting$ | async"
+      [errorsMap]="errorMessagesMap$ | async"
+      (articleSubmit)="onFormSubmit($event)"
+    ></ma-article-form>
+  </ng-container>
+
+  <ng-template #editEmptyContent>
+    <ma-error-sphere></ma-error-sphere>
+  </ng-template>
+</ng-template>

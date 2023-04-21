@@ -1,7 +1,5 @@
 import { z } from 'zod';
 
-import { backendErrorsModelSchema } from 'src/app/shared/models/backendErrors.model';
-import { currentUserModelSchema } from 'src/app/shared/models/currentUser.model';
 import { RegExpKeys, RegExpMap } from 'src/app/shared/common/regExp';
 
 export const formPasswordModelSchema = z.object({
@@ -18,13 +16,3 @@ export const formPasswordModelSchema = z.object({
       }
     ),
 });
-
-export const authResponseModelSchema = z.object({
-  user: currentUserModelSchema,
-});
-export type AuthResponseModel = z.infer<typeof authResponseModelSchema>;
-
-export const authBackendErrorsModelSchema = z.object({
-  errors: backendErrorsModelSchema,
-});
-export type AuthBackendErrorsModel = z.infer<typeof authBackendErrorsModelSchema>;
