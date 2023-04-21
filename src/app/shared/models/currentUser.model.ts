@@ -22,3 +22,19 @@ export const currentUserModelSchema = z.object({
 });
 
 export type CurrentUserModel = z.infer<typeof currentUserModelSchema>;
+
+export const currentUserWithPasswordModelSchema = currentUserModelSchema.extend({
+  password: z
+    .string()
+    .min(8, 'Min password length 8 characters')
+    .refine(
+      (value) => {
+        if (!value) return false;
+        return RegExpMap[RegExpKeys.isCorrectPassword](value);
+      },
+      {
+        message: 'password must contain letters and numbers',
+      }
+    ),
+});
+export type CurrentUserWithPasswordModel = z.infer<typeof currentUserWithPasswordModelSchema>;

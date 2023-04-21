@@ -10,4 +10,8 @@ export enum ActionTypes {
   FETCH_USER_BY_TOKEN = `[Auth] fetch user by token`,
   FETCH_USER_BY_TOKEN_SUCCESS = '[Auth] fetch user by token success',
   FETCH_USER_BY_TOKEN_FAILURE = '[Auth] fetch user by token failure',
+
+  UPDATE_USER = `[Auth] update user`,
+  UPDATE_USER_SUCCESS = '[Auth] update user success',
+  UPDATE_USER_FAILURE = '[Auth] update user failure',
 }

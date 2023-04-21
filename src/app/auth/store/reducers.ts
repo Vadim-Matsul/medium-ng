@@ -12,6 +12,7 @@ import {
   registerFailureAction,
   registerSuccessAction,
 } from './actions/register.actions';
+import { updateUserSuccessAction } from './actions/updateUser.actions';
 import { type AuthStateModel } from '../models/authState.model';
 
 const initialState: AuthStateModel = {
@@ -82,6 +83,15 @@ const authReducer = createReducer<AuthStateModel>(
       draft.isLoading = false;
       draft.isLoggedIn = false;
       draft.currentUser = null;
+    })
+  ),
+  /** ---
+   * UPDATE USER
+   *  + contain only business-logic
+   * --- */
+  on(updateUserSuccessAction, (state, { currentUser }) =>
+    produce(state, (draft) => {
+      draft.currentUser = currentUser;
     })
   )
 );

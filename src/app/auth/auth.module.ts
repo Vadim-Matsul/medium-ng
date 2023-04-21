@@ -15,6 +15,7 @@ import { AuthService } from './services/auth.service';
 import { FetchUserEffect } from './store/effects/fetchUser.effect';
 import { LoginEffect } from './store/effects/login.effect';
 import { RegisterEffect } from './store/effects/register.effect';
+import { UpdateUserEffect } from './store/effects/updateUser.effect';
 import { StoreSlices } from '../shared/store/slices';
 import { reducers } from './store/reducers';
 
@@ -24,7 +25,7 @@ import { reducers } from './store/reducers';
     CommonModule,
     ReactiveFormsModule,
     StoreModule.forFeature(StoreSlices.AUTH, reducers),
-    EffectsModule.forFeature([RegisterEffect, LoginEffect, FetchUserEffect]),
+    EffectsModule.forFeature([RegisterEffect, LoginEffect, FetchUserEffect, UpdateUserEffect]),
     /** project */
     AuthRoutingModule,
     ErrorMessagesModule,

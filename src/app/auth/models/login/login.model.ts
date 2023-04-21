@@ -1,11 +1,9 @@
 import { z } from 'zod';
 
-import { formPasswordModelSchema } from '../auth.model';
-import { currentUserModelSchema } from 'src/app/shared/models/currentUser.model';
+import { currentUserWithPasswordModelSchema } from 'src/app/shared/models/currentUser.model';
 
-export const loginFormModelSchema = currentUserModelSchema
-  .pick({
-    email: true,
-  })
-  .merge(formPasswordModelSchema);
+export const loginFormModelSchema = currentUserWithPasswordModelSchema.pick({
+  email: true,
+  password: true,
+});
 export type LoginFormModel = z.infer<typeof loginFormModelSchema>;
