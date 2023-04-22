@@ -1,13 +1,8 @@
 <ma-loader *ngIf="isLoading$ | async; else feedContent"></ma-loader>
 
 <ng-template #feedContent>
-  <ng-container
-    *ngIf="!!(feed$ | async) && (feed$ | async).articles.length; else emptyFeed"
-  >
-    <article
-      *ngFor="let article of (feed$ | async).articles"
-      class="article-preview"
-    >
+  <ng-container *ngIf="!!(feed$ | async) && (feed$ | async).articles.length; else emptyFeed">
+    <article *ngFor="let article of (feed$ | async).articles" class="article-preview">
       <div class="article-meta">
         <a [routerLink]="['/', HttpLinks.Profiles, article.author.username]">
           <img [src]="article.author.image" />
@@ -19,14 +14,14 @@
           <span class="date">{{ article.createdAt | date }}</span>
         </div>
         <div class="pull-xs-right">
-          <!-- TODO: implement -->
-          ADD TO FAVORITES
+          <ma-favorite-button
+            [articleSlug]="article.slug"
+            [isFavorited]="article.favorited"
+            [favoritesCount]="article.favoritesCount"
+          ></ma-favorite-button>
         </div>
       </div>
-      <a
-        [routerLink]="['/', HttpLinks.Posts, article.slug]"
-        class="preview-link"
-      >
+      <a [routerLink]="['/', HttpLinks.Posts, article.slug]" class="preview-link">
         <h1>{{ article.title }}</h1>
         <p>{{ article.description }}</p>
       </a>

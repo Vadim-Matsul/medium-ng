@@ -12,6 +12,7 @@ import { ControlFormService } from '../shared/services/controlForm.service';
 import { PersistentService } from '../shared/services/persistent.service';
 import { ZodService } from '../shared/services/zod.service';
 import { AuthService } from './services/auth.service';
+import { CheckToLoggedInEffect } from './store/effects/checkToLoggedIn.effect';
 import { FetchUserEffect } from './store/effects/fetchUser.effect';
 import { LoginEffect } from './store/effects/login.effect';
 import { LogoutEffect } from './store/effects/logout.effect';
@@ -32,6 +33,7 @@ import { reducers } from './store/reducers';
       FetchUserEffect,
       UpdateUserEffect,
       LogoutEffect,
+      CheckToLoggedInEffect,
     ]),
     /** project */
     AuthRoutingModule,

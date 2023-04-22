@@ -5,6 +5,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 
 import { ErrorMessagesModule } from '../errorMessages/errorMessages.module';
+import { FavoriteButtonModule } from '../favorite-button/favorite-button.module';
 import { LoaderModule } from '../loader/loader.module';
 import { PaginationModule } from '../pagination/pagination.module';
 import { TagListModule } from '../tagList/tag-list.module';
@@ -26,6 +27,7 @@ import { reducers } from './store/reducer';
     LoaderModule,
     PaginationModule,
     TagListModule,
+    FavoriteButtonModule,
   ],
   declarations: [FeedComponent],
   providers: [FeedService],
