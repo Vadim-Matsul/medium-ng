@@ -24,4 +24,12 @@ export class PersistentService {
       return null;
     }
   }
+
+  remove(key: string) {
+    try {
+      localStorage.removeItem(key);
+    } catch (e) {
+      console.error(`Error removing ${key} item from localStorage: `, e);
+    }
+  }
 }

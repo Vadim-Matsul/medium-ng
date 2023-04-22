@@ -1,1 +1,81 @@
-settings
+<div *ngIf="isLoading; else settingsContent" class="loader-container">
+  <ma-loader></ma-loader>
+</div>
+
+<ng-template #settingsContent>
+  <section *ngIf="!!currentUser; else settingsEmptyContent" class="container page m-b-2">
+    <div class="row">
+      <div class="col-md-6 offset-md-3 col-xs-12">
+        <h1 class="text-xs-center">Your Settings</h1>
+
+        <ma-error-messages
+          *ngIf="!!(errorMessages$ | async)"
+          [errorMessages]="errorMessages$ | async"
+        ></ma-error-messages>
+
+        <form [formGroup]="form" (ngSubmit)="onFormSubmit()">
+          <fieldset [disabled]="isSubmitting$ | async">
+            <fieldset class="form-group">
+              <input
+                type="text"
+                formControlName="image"
+                placeholder="URL of profile picture"
+                class="form-control"
+              />
+            </fieldset>
+            <fieldset class="form-group">
+              <input
+                type="text"
+                formControlName="username"
+                placeholder="Username"
+                class="form-control form-control-lg"
+              />
+            </fieldset>
+            <fieldset class="form-group">
+              <textarea
+                formControlName="bio"
+                placeholder="Short biography about you"
+                rows="6"
+                class="form-control form-control-lg"
+              ></textarea>
+            </fieldset>
+            <fieldset class="form-group">
+              <input
+                type="text"
+                formControlName="email"
+                placeholder="Email"
+                class="form-control form-control-lg"
+              />
+            </fieldset>
+            <fieldset class="form-group">
+              <input
+                type="password"
+                formControlName="password"
+                placeholder="Password"
+                class="form-control form-control-lg"
+              />
+            </fieldset>
+
+            <button
+              type="submit"
+              [disabled]="!!(errorMessages$ | async)"
+              class="btn btn-primary btn-lg pull-xs-right"
+            >
+              Update Profile
+            </button>
+          </fieldset>
+        </form>
+
+        <hr />
+
+        <button type="text" (click)="logoutUser()" class="btn btn-outline-danger">
+          Click to logout
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <ng-template #settingsEmptyContent>
+    <ma-error-sphere></ma-error-sphere>
+  </ng-template>
+</ng-template>

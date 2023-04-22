@@ -14,6 +14,7 @@ import { ZodService } from '../shared/services/zod.service';
 import { AuthService } from './services/auth.service';
 import { FetchUserEffect } from './store/effects/fetchUser.effect';
 import { LoginEffect } from './store/effects/login.effect';
+import { LogoutEffect } from './store/effects/logout.effect';
 import { RegisterEffect } from './store/effects/register.effect';
 import { UpdateUserEffect } from './store/effects/updateUser.effect';
 import { StoreSlices } from '../shared/store/slices';
@@ -25,7 +26,13 @@ import { reducers } from './store/reducers';
     CommonModule,
     ReactiveFormsModule,
     StoreModule.forFeature(StoreSlices.AUTH, reducers),
-    EffectsModule.forFeature([RegisterEffect, LoginEffect, FetchUserEffect, UpdateUserEffect]),
+    EffectsModule.forFeature([
+      RegisterEffect,
+      LoginEffect,
+      FetchUserEffect,
+      UpdateUserEffect,
+      LogoutEffect,
+    ]),
     /** project */
     AuthRoutingModule,
     ErrorMessagesModule,

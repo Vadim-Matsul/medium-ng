@@ -6,6 +6,7 @@ import { of } from 'rxjs';
 import { catchError, exhaustMap, map, tap } from 'rxjs/operators';
 
 import { AuthService } from '../../services/auth.service';
+import { PersistentService } from 'src/app/shared/services/persistent.service';
 import {
   updateUserAction,
   updateUserFailureAction,
@@ -13,6 +14,7 @@ import {
 } from '../actions/updateUser.actions';
 import { backendErrorsResponseModelSchema } from 'src/app/shared/models/backendErrors.model';
 import { HttpLinks } from 'src/app/shared/common/httpLinks';
+import { StorageKeys } from 'src/app/shared/common/storage';
 
 @Injectable()
 export class UpdateUserEffect {
@@ -33,11 +35,12 @@ export class UpdateUserEffect {
     );
   });
 
-  redirectAfterUpdate$ = createEffect(
+  updateTokenAfterChanges$ = createEffect(
     () => {
       return this.actions$.pipe(
         ofType(updateUserSuccessAction),
-        tap(({ currentUser: { username } }) => {
+        tap(({ currentUser: { username, token } }) => {
+          this.persistentService.set(StorageKeys.Token, token);
           this.router.navigateByUrl(`/${HttpLinks.Profiles}/${username}`);
         })
       );
@@ -48,6 +51,7 @@ export class UpdateUserEffect {
   constructor(
     private actions$: Actions,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private persistentService: PersistentService
   ) {}
 }

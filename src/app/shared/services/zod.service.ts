@@ -3,7 +3,7 @@ import { type SafeParseReturnType } from 'zod';
 
 import { type BackendErrorsModel } from '../models/backendErrors.model';
 
-type SafeParseData = SafeParseReturnType<Record<string, string>, Record<string, string>>;
+type SafeParseData = SafeParseReturnType<Record<string, any>, Record<string, any>>;
 
 @Injectable()
 export class ZodService {

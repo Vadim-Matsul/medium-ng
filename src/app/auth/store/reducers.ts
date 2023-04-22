@@ -12,6 +12,7 @@ import {
   registerFailureAction,
   registerSuccessAction,
 } from './actions/register.actions';
+import { logoutUserAction } from './actions/sync.actions';
 import { updateUserSuccessAction } from './actions/updateUser.actions';
 import { type AuthStateModel } from '../models/authState.model';
 
@@ -92,6 +93,12 @@ const authReducer = createReducer<AuthStateModel>(
   on(updateUserSuccessAction, (state, { currentUser }) =>
     produce(state, (draft) => {
       draft.currentUser = currentUser;
+    })
+  ),
+  /** --- LOGOUT --- */
+  on(logoutUserAction, () =>
+    produce(initialState, (draft) => {
+      draft.isLoggedIn = false;
     })
   )
 );
