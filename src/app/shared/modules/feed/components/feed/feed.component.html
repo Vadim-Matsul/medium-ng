@@ -34,7 +34,10 @@
   </ng-container>
 
   <ng-template #emptyFeed>
-    <ma-error-sphere></ma-error-sphere>
+    <div *ngIf="!(error$ | async)" class="empty-container">
+      <p>Posts are empty</p>
+    </div>
+
     <ma-error-message
       *ngIf="error$ | async"
       [errorMessage]="'Posts are empty. Something went wrong...'"

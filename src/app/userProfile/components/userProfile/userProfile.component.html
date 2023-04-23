@@ -1,1 +1,75 @@
-userProfile
+<div *ngIf="isLoading$ | async; else profileContent" class="loader-container">
+  <ma-loader></ma-loader>
+</div>
+
+<ng-template #profileContent>
+  <section *ngIf="!!userProfile; else profileEmptyContent" class="profile-page">
+    <!-- 
+      BANNER START 
+    -->
+    <ma-banner *ngIf="isUserProfile$ | async; else anotherAuthor">
+      <div class="user-info" style="background: transparent">
+        <div class="row text-xs-center" #bannerChild>
+          <div class="col-xs-12 col-md-10 offset-md-1">
+            <img [src]="userProfile.image" class="user-img" />
+            <h2>{{ userProfile.username }}</h2>
+            <p *ngIf="userProfile.bio">{{ userProfile.bio }}</p>
+            <div>
+              <a
+                [routerLink]="['/', HttpLinks.Settings]"
+                class="pull-xs-right btn btn-sm btn-outline-secondary"
+              >
+                <i class="ion-gear-b"></i>
+                Edit Profile Settings
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ma-banner>
+
+    <ng-template #anotherAuthor>
+      <div class="user-info">
+        <div class="container">
+          <div class="row">
+            <div class="col-xs-12 col-md-10 offset-md-1">
+              <img [src]="userProfile.image" class="user-img" />
+              <h4>{{ userProfile.username }}</h4>
+              <p *ngIf="userProfile.bio">{{ userProfile.bio }}</p>
+              <!-- TODO: implement follow button -->
+              <div>
+                <button type="button" class="btn action-btn btn-sm btn-outline-secondary">
+                  follow button
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+    <!-- 
+      BANNER END 
+    -->
+
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12 col-md-10 offset-md-1">
+          <ma-profile-toggler
+            [author]="userProfile"
+            [isFavorite]="isFavoritesPage"
+          ></ma-profile-toggler>
+          <ma-feed [apiUrl]="apiUrl"></ma-feed>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <ng-template #profileEmptyContent>
+    <ma-error-sphere *ngIf="!(errorMessages$ | async)"></ma-error-sphere>
+
+    <ma-error-messages
+      *ngIf="errorMessages$ | async"
+      [errorMessages]="errorMessages$ | async"
+    ></ma-error-messages>
+  </ng-template>
+</ng-template>

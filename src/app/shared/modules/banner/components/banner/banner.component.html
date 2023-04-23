@@ -1,6 +1,9 @@
 <div class="banner banner-img">
   <div class="container">
-    <h1>Medium clone</h1>
-    <p>A place to share your Angular knowledge.</p>
+    <ng-content *ngIf="isChildExists"></ng-content>
+    <div *ngIf="!isChildExists">
+      <h1>Medium clone</h1>
+      <p>A place to share your Angular knowledge.</p>
+    </div>
   </div>
 </div>

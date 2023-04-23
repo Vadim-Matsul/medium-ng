@@ -3,6 +3,11 @@ import { CommonModule } from '@angular/common';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 
+import { BannerModule } from '../shared/modules/banner/banner.module';
+import { ErrorMessagesModule } from '../shared/modules/errorMessages/errorMessages.module';
+import { FeedModule } from '../shared/modules/feed/feed.module';
+import { FeedTogglerModule } from '../shared/modules/feedToggler/feedToggler.module';
+import { LoaderModule } from '../shared/modules/loader/loader.module';
 import { UserProfileRoutingModule } from './userProfile-routing.module';
 import { UserProfileComponent } from './components/userProfile/userProfile.component';
 import { UserProfileService } from './services/userProfile.service';
@@ -17,6 +22,11 @@ import { userProfileFeature } from './store/reducers';
     EffectsModule.forFeature([GetUserProfileEffect]),
     /** project */
     UserProfileRoutingModule,
+    LoaderModule,
+    ErrorMessagesModule,
+    BannerModule,
+    FeedTogglerModule,
+    FeedModule,
   ],
   declarations: [UserProfileComponent],
   providers: [UserProfileService],

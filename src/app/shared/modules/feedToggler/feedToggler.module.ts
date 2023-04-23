@@ -4,6 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
 import { FeedTogglerComponent } from './components/feedToggler/feedToggler.component';
+import { ProfileTogglerComponent } from './components/profileToggler/profileToggler.component';
 import { RouterLinkActiveWithoutQueryDirective } from '../../directives/routerLinkActiveWithoutQuery.directive';
 
 @NgModule({
@@ -13,7 +14,13 @@ import { RouterLinkActiveWithoutQueryDirective } from '../../directives/routerLi
     HttpClientModule,
     RouterModule,
   ],
-  declarations: [FeedTogglerComponent, RouterLinkActiveWithoutQueryDirective],
-  exports: [FeedTogglerComponent],
+  declarations: [
+    /** components */
+    FeedTogglerComponent,
+    ProfileTogglerComponent,
+    /** directives */
+    RouterLinkActiveWithoutQueryDirective,
+  ],
+  exports: [FeedTogglerComponent, ProfileTogglerComponent],
 })
 export class FeedTogglerModule {}

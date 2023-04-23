@@ -1,0 +1,24 @@
+<nav class="articles-toggle">
+  <ul class="nav nav-pills outline-active">
+    <li class="nav-item">
+      <a
+        [routerLink]="['/', HttpLinks.Profiles, authorProps.username]"
+        [ngClass]="{ active: !isFavoriteProps }"
+        class="nav-link"
+      >
+        {{ authorProps.username | uppercase }} Posts
+      </a>
+    </li>
+    <!-- [routerLinkActiveWithoutQuery]="['/', HttpLinks.Profiles + '/', authorProps.username]" -->
+
+    <li class="nav-item">
+      <a
+        [routerLink]="['/', HttpLinks.Profiles, authorProps.username, HttpLinks.Favorites]"
+        [ngClass]="{ active: isFavoriteProps }"
+        class="nav-link"
+      >
+        Favorited Posts
+      </a>
+    </li>
+  </ul>
+</nav>

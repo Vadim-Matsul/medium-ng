@@ -1,0 +1,23 @@
+$container_height: 150px;
+
+.empty-container {
+  background-color: rgba(128, 128, 128, 0.356);
+  background-blend-mode: color-burn;
+  background-image: url('/assets/images/black_hole.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: $container_height;
+  border-radius: calc(0.1 * $container_height);
+  transform: translateY(10px);
+
+  color: white;
+  font-weight: 600;
+  font-size: 38px;
+  line-height: 42px;
+
+  & p {
+    display: inline-block;
+    user-select: none;
+    transform: translateY(calc($container_height/2 - 50%));
+  }
+}
