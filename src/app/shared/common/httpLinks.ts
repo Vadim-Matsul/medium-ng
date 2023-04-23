@@ -10,4 +10,5 @@ export enum HttpLinks {
   Tags = 'tags',
   Your_Feed = 'feed',
   Edit = 'edit',
+  Favorites = 'favorites',
 }

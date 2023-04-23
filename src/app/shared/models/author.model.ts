@@ -14,4 +14,4 @@ export const authorModelSchema = currentUserModelSchema
     })
   );
 
-export type authorModel = z.infer<typeof authorModelSchema>;
+export type AuthorModel = z.infer<typeof authorModelSchema>;

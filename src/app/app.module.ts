@@ -15,6 +15,7 @@ import { GlobalFeedModule } from './globalFeed/globalFeed.module';
 import { SettingsModule } from './settings/settings.module';
 import { TopBarModule } from './shared/modules/topBar/topBar.module';
 import { TagFeedModule } from './tagFeed/tagFeed.module';
+import { UserProfileModule } from './userProfile/userProfile.module';
 import { YourFeedModule } from './yourFeed/yourFeed.module';
 import { AppComponent } from './app.component';
 import { AuthInterceptor } from './shared/services/authInterceptor.service';
@@ -47,6 +48,7 @@ import { environment } from 'src/environments/environment';
     EditArticleModule /** CreateArticleModule must be registered before EditArticleModule */,
     ArticleModule /** CreateArticleModule & EditArticleModule must be registered before ArticleModule */,
     SettingsModule,
+    UserProfileModule,
   ],
   providers: [
     PersistentService,
