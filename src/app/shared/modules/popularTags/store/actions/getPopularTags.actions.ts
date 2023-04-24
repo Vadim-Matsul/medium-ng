@@ -10,7 +10,4 @@ export const getPopularTagsSuccessAction = createAction(
   props<{ popularTags: PopularTagsModel }>()
 );
 
-export const getPopularTagsFailureAction = createAction(
-  ActionTypes.GET_POPULAR_TAGS_FAILURE
-  // TODO: handle errors props
-);
+export const getPopularTagsFailureAction = createAction(ActionTypes.GET_POPULAR_TAGS_FAILURE);

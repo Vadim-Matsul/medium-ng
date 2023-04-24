@@ -7,6 +7,7 @@ import { BannerModule } from '../shared/modules/banner/banner.module';
 import { ErrorMessagesModule } from '../shared/modules/errorMessages/errorMessages.module';
 import { FeedModule } from '../shared/modules/feed/feed.module';
 import { FeedTogglerModule } from '../shared/modules/feedToggler/feedToggler.module';
+import { FollowButtonModule } from '../shared/modules/follow-button/follow-button.module';
 import { LoaderModule } from '../shared/modules/loader/loader.module';
 import { UserProfileRoutingModule } from './userProfile-routing.module';
 import { UserProfileComponent } from './components/userProfile/userProfile.component';
@@ -27,6 +28,7 @@ import { userProfileFeature } from './store/reducers';
     BannerModule,
     FeedTogglerModule,
     FeedModule,
+    FollowButtonModule,
   ],
   declarations: [UserProfileComponent],
   providers: [UserProfileService],

@@ -10,7 +10,4 @@ export const getFeedSuccessAction = createAction(
   props<{ feed: FeedResponseModel }>()
 );
 
-export const getFeedFailureAction = createAction(
-  ActionTypes.GET_FEED_FAILURE
-  // TODO: handle errors props
-);
+export const getFeedFailureAction = createAction(ActionTypes.GET_FEED_FAILURE);

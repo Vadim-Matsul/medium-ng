@@ -24,7 +24,6 @@ export class TagFeedComponent implements OnInit, OnDestroy {
   private initializeValues() {
     this.#routeParamsSubscription = this.route.params.subscribe((params) => {
       const tagName = <string | null>params[TAG_SLUG];
-      // TODO: handle bad case without tagname
       if (!tagName) return;
       this.tagName = tagName;
       this.apiUrl = `${StoreEndpoints.ALL_FEEDS}?tag=${tagName}`;

@@ -30,7 +30,6 @@ const popularTagsReducer = createReducer<PopularTagsStateModel>(
   on(getPopularTagsFailureAction, (state) =>
     produce(state, (draft) => {
       draft.isLoading = false;
-      // TODO: handle real error message
       draft.error = 'some error';
     })
   )

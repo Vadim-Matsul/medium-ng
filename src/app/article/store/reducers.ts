@@ -32,7 +32,6 @@ const articleReducer = createReducer<ArticleStateModel>(
   on(getArticleFailureAction, (state) =>
     produce(state, (draft) => {
       draft.isLoading = false;
-      // TODO: handle real error
       draft.error = 'some error';
     })
   ),

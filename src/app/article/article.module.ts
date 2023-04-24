@@ -4,6 +4,8 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 
 import { ErrorMessagesModule } from '../shared/modules/errorMessages/errorMessages.module';
+import { FavoriteButtonModule } from '../shared/modules/favorite-button/favorite-button.module';
+import { FollowButtonModule } from '../shared/modules/follow-button/follow-button.module';
 import { LoaderModule } from '../shared/modules/loader/loader.module';
 import { TagListModule } from '../shared/modules/tagList/tag-list.module';
 import { ArticleRoutingModule } from './article-routing.module';
@@ -25,6 +27,8 @@ import { articleFeature } from './store/reducers';
     LoaderModule,
     ErrorMessagesModule,
     TagListModule,
+    FavoriteButtonModule,
+    FollowButtonModule,
   ],
   declarations: [ArticleComponent],
   providers: [SharedArticleService, ArticleService],

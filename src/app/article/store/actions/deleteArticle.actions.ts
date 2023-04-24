@@ -9,7 +9,4 @@ export const deleteArticleAction = createAction(
 
 export const deleteArticleSuccessAction = createAction(ActionTypes.DELETE_ARTICLE_SUCCESS);
 
-export const deleteArticleFailureAction = createAction(
-  ActionTypes.DELETE_ARTICLE_FAILURE
-  // TODO: add real error props
-);
+export const deleteArticleFailureAction = createAction(ActionTypes.DELETE_ARTICLE_FAILURE);

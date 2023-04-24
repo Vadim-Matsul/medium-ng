@@ -10,7 +10,4 @@ export const getArticleSuccessAction = createAction(
   props<{ article: FeedModel }>()
 );
 
-export const getArticleFailureAction = createAction(
-  ActionTypes.GET_ARTICLE_FAILURE
-  // TODO: add real error props
-);
+export const getArticleFailureAction = createAction(ActionTypes.GET_ARTICLE_FAILURE);

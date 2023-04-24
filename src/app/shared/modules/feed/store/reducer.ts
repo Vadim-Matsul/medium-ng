@@ -32,7 +32,6 @@ const feedReducer = createReducer<FeedStateModel>(
   on(getFeedFailureAction, (state) =>
     produce(state, (draft) => {
       draft.isLoading = false;
-      // TODO: implement error saving logic
       draft.error = 'some error';
     })
   ),

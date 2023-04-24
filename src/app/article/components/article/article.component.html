@@ -10,49 +10,38 @@
           <div class="container">
             <h1>{{ article.title }}</h1>
             <div class="article-meta">
-              <a
-                [routerLink]="[
-                  '/',
-                  HttpLinks.Profiles,
-                  article.author.username
-                ]"
-              >
+              <a [routerLink]="['/', HttpLinks.Profiles, article.author.username]">
                 <img [src]="article.author.image" />
               </a>
               <div class="info">
-                <a
-                  [routerLink]="[
-                    '/',
-                    HttpLinks.Profiles,
-                    article.author.username
-                  ]"
-                  class="author"
-                >
+                <a [routerLink]="['/', HttpLinks.Profiles, article.author.username]" class="author">
                   {{ article.author.username }}
                 </a>
                 <span class="date">
                   {{ article.createdAt | date }}
                 </span>
               </div>
-              <!-- TODO: add follow & favorite buttons  -->
+              <span *ngIf="!isAuthor">
+                <ma-favorite-button
+                  [articleSlug]="article.slug"
+                  [favoritesCount]="article.favoritesCount"
+                  [isFavorited]="article.favorited"
+                ></ma-favorite-button>
+                <ma-follow-button
+                  [username]="article.author.username"
+                  [isFollowing]="article.author.following"
+                ></ma-follow-button>
+              </span>
               <span *ngIf="isAuthor">
                 <a
-                  [routerLink]="[
-                    '/',
-                    HttpLinks.Posts,
-                    article.slug,
-                    HttpLinks.Edit
-                  ]"
+                  [routerLink]="['/', HttpLinks.Posts, article.slug, HttpLinks.Edit]"
                   class="btn btn-outline-secondary btn-sm m-r-1"
                 >
                   <i class="ion-edit"></i>
                   Edit Post
                 </a>
 
-                <button
-                  (click)="deleteArticle()"
-                  class="btn btn-sm btn-outline-danger"
-                >
+                <button (click)="deleteArticle()" class="btn btn-sm btn-outline-danger">
                   <i class="ion-trash-a"></i>
                   Delete Post
                 </button>

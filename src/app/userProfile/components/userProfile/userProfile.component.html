@@ -36,12 +36,10 @@
               <img [src]="userProfile.image" class="user-img" />
               <h4>{{ userProfile.username }}</h4>
               <p *ngIf="userProfile.bio">{{ userProfile.bio }}</p>
-              <!-- TODO: implement follow button -->
-              <div>
-                <button type="button" class="btn action-btn btn-sm btn-outline-secondary">
-                  follow button
-                </button>
-              </div>
+              <ma-follow-button
+                [username]="userProfile.username"
+                [isFollowing]="userProfile.following"
+              ></ma-follow-button>
             </div>
           </div>
         </div>

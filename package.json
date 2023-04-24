@@ -5,7 +5,7 @@
     "prepare": "husky install",
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "ng build --configuration production ",
     "watch": "ng build --watch --configuration development",
     "format": "prettier --config ./.prettierrc.js --ignore-path ./.prettierignore --write \"**/*.{ts,tsx,js,jsx,md}\""
   },
@@ -23,10 +23,10 @@
     "@ngrx/router-store": "^15.4.0",
     "@ngrx/store": "^15.4.0",
     "@ngrx/store-devtools": "^15.4.0",
-    "TagCloud": "^2.3.2",
     "immer": "^9.0.21",
     "query-string": "^8.1.0",
     "rxjs": "~7.8.0",
+    "TagCloud": "^2.3.2",
     "tslib": "^2.3.0",
     "zod": "^3.21.4",
     "zone.js": "~0.12.0"
