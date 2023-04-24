@@ -16,8 +16,8 @@ type Errors = BackendErrorsModel | null;
 
 @Component({
   selector: 'ma-article-form',
-  templateUrl: './ArticleForm.component.html',
-  styleUrls: ['./ArticleForm.component.scss'],
+  templateUrl: './articleForm.component.html',
+  styleUrls: ['./articleForm.component.scss'],
 })
 export class ArticleFormComponent implements OnInit {
   private errorsMapProps$ = new BehaviorSubject<Errors>(null);

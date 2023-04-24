@@ -45,8 +45,10 @@ import { environment } from 'src/environments/environment';
     YourFeedModule,
     TagFeedModule,
     CreateArticleModule,
-    EditArticleModule /** CreateArticleModule must be registered before EditArticleModule */,
-    ArticleModule /** CreateArticleModule & EditArticleModule must be registered before ArticleModule */,
+    /** CreateArticleModule must be registered before EditArticleModule */
+    EditArticleModule,
+    /** CreateArticleModule & EditArticleModule must be registered before ArticleModule */
+    ArticleModule,
     SettingsModule,
     UserProfileModule,
   ],
